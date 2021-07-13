@@ -34,15 +34,5 @@ const router = new Router({
     // mode: "history"
 })
 
-// // 路由守卫
-// router.beforeEach((to, from, next) => {
-//     const isLogin = !!localStorage.eleToken
-//
-//     if (to.path === '/login' || to.path === '/register') {
-//         next()
-//     } else {
-//         isLogin ? next() : next('/login')
-//     }
-// })
 
 export default router
