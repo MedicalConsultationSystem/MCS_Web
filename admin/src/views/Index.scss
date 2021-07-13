@@ -1,98 +1,91 @@
-// // 路由守卫
-// router.beforeEach((to, from, next) => {
-//     const isLogin = !!localStorage.eleToken
-//
-//     if (to.path === '/login' || to.path === '/register') {
-//         next()
-//     } else {
-//         isLogin ? next() : next('/login')
-//     }
-// })
-@import 'src/style/basics';
-@media screen and (min-width: 320px)and (max-width: 750px){
-  .el-header{
-    padding: 0 $padding-xs;
-  }
-  .layout-cont {
-    .main-cont{
-      .breadcrumb{
-        padding: 0 $padding-xs;
-      }
-    }
-  }
-  .layout-cont{
-    .right-box{
-      margin-right: $margin-xs;
-    }
-  }
-  .search-component{
-    width: 30px;
-  }
-  .screenfull{
-    width: 26px;
-    text-align: center;
-  }
-  .el-main{
-    .admin-box{
-      margin-left: 0;
-      margin-right: 0;
-    }
-    .big.admin-box{
-      padding: 0;
-    }
-    .big {
-      .bottom {
-        .chart-player{
-          height: auto!important;
-          margin-bottom: 15px;
-        }
-        .todoapp{
-          background-color: #fff;
-          padding-bottom: 10px;
-        }
-      }
-    }
-  }
-
-  .card .car-left,
-  .card .car-right{
-    width: 100%;
+#app{
+  margin-top: 0;
+  .el-container {
+    position: relative;
     height: 100%;
+    width: 100%;
   }
-  .card{
-    padding-left: $padding-xs;
-    padding-right: $padding-xs;
 
+  .tit-text {
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    vertical-align: middle;
+    padding-left: 10px;
   }
-  .card {
-    .text{
-      width: 100%;
-      h4{
-        white-space: break-spaces;
-      }
+
+  .el-aside{
+    -webkit-transition: width .2s;
+    transition: width .2s;
+    width: 220px;
+    background-color: #191a23;
+    height: 100%;
+    position: relative;
+    font-size: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+  }
+
+  .header-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fl-right {
+    float: right;
+  }
+
+  .right-box{
+    margin-right: 5px;
+  }
+
+  .el-submenu__title,.el-menu-item{
+    i{
+      color: inherit !important;
     }
   }
-  .shadow{
-    margin-left: 4px;
-    margin-right: 4px;
-    .grid-content{
-      margin-bottom: 10px;
-      padding: 0;
+
+  .el-submenu__title:hover,.el-menu-item:hover{
+    i{
+      color: inherit !important;
+    }
+    span{
+      color: inherit !important;
     }
   }
-  .el-dialog{
-    width: 90%;
+
+  .header-cont {
+    height: 60px;
+    background: #fff;
   }
-  .el-transfer{
-    .el-transfer-panel{
-      width: 40%;
+
+  .title {
+    min-height: 60px;
+    line-height: 60px;
+    background: #191a23;
+    text-align: center;
+    transition: all 0.3s;
+    .logoimg {
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      background: #fff;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    .tit-text {
       display: inline-block;
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      vertical-align: middle;
+      padding-left: 10px;
     }
-    .el-transfer__buttons{
-      padding: 0 5px;
-      display: inline-block;
-    }
-
   }
-
 }
