@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-aside>
+      <el-aside :style="{background: '#191a23'}">
         <div class="title" :style="{background:'#191a23'}">
 <!--          <img alt class="logoimg" :src="$GIN_VUE_ADMIN.appLogo">-->
           <p class="tit-text" :style="{color:'#fff'}">MVC</p>
@@ -24,19 +24,19 @@
 <!--          </el-menu-item>-->
 <!--        </el-menu>-->
         <el-menu :default-openeds="['1', '3']">
-          <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>医生</template>
+          <el-submenu index="/doctor" >
+            <template slot="title" @click="goto('/doctor')"><i class="el-icon-message"></i>医生</template>
           </el-submenu>
-          <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
+          <el-submenu index="/medicine">
+            <template slot="title" @click="goto('/medicine')"><i class="el-icon-menu"></i>药物</template>
           </el-submenu>
         </el-menu>
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 13px">
+        <el-header style="text-align: right; font-size: 13px ;position: relative ;">
           <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
+            <i class="el-icon-setting" style="margin-right: 16px"></i>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click="goto('/login')">登出</el-dropdown-item>
             </el-dropdown-menu>
