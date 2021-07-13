@@ -7,7 +7,7 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            redirect: 'index'
+            redirect: 'login'
         },
         {
             path: '/index',
@@ -22,6 +22,16 @@ const router = new Router({
                     component: () => import('./views/home/Home'),
                     meta: { title: '首页' }
                 },
+                {
+                    path: '/doctor',
+                    name: 'doctor',
+                    component: () => import('./views/doctor/Doctor'),
+                },
+                {
+                    path: '/medicine',
+                    name: 'medicine',
+                    component: () => import('./views/medicine/Medicine'),
+                }
             ]
         },
         {
@@ -29,9 +39,7 @@ const router = new Router({
             name: 'login',
             component: () => import('./views/login/Login')
         }
-
     ]
-    // mode: "history"
 })
 
 
