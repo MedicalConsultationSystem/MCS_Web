@@ -61,7 +61,7 @@
           <el-button
               size="small"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              >删除</el-button>
           <!-- <el-popover
             placement="top"
             width="160"
@@ -76,6 +76,18 @@
         </template>
       </el-table-column>
     </el-table>
+    <div v-else class="txt">{{message}}</div>
+    <div class="paginations">
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="paginations.page_index"
+          :page-sizes="paginations.page_sizes"
+          :page-size="paginations.page_size"
+          :layout="paginations.layout"
+          :total="paginations.total">
+      </el-pagination>
+    </div>
   </div>
 </div>
 </template>
@@ -114,6 +126,11 @@ name: "Doctor",
         remark:"无",
       },
     ],
+    dialog:{  //弹出框
+      title:'',
+      show:false,
+      option:'edit'
+    },
     allTableData:[], //分页数据
     formDate: {  //添加编辑删除需要传的字段
       doctorName: "",
@@ -122,10 +139,29 @@ name: "Doctor",
     },
   }
   },
-  created () {
-    this.getProfiles()
-  },
   methods:{
+    handleCurrentChange(page){
+      //获取当前页
+      let index = this.paginations.page_size * (page -1);
+
+      //数据的总数
+      let nums = this.paginations.page_size * page;
+      //容器
+      let tables = [];
+      for(let i = index; i < nums; i++) {
+        if(this.allTableData[i]) {
+          tables.push(this.allTableData[i])
+        }
+        this.tableData = tables;
+      }
+    },
+    handleSizeChange(page_size){
+      this.paginations.page_index = 1;
+      this.paginations.page_size = page_size;
+      this.tableData = this.allTableData.filter((item,index) => {
+        return index < page_size;
+      })
+    },
     handleEdit(index,row) { //编辑信息
       this.dialog={
         title:'编辑信息',
@@ -152,6 +188,17 @@ name: "Doctor",
 }
 .btnRight{
   float: right;
+}
+.paginations{
+  text-align: right;
+  margin-top: 10px;
+}
+.txt {
+  padding: 20px 0;
+  background: #eee;
+  font-size: 16px;
+  text-align: center;
+  color: #606266;
 }
 
 </style>
