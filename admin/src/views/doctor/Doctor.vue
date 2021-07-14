@@ -14,7 +14,7 @@
         </el-form-item>
       </div>
       <el-form-item class="btnRight">
-        <el-button type="primary" size ="small" icon="el-icon-edit-outline" >添加</el-button>
+        <el-button type="primary" size ="small" icon="el-icon-edit-outline" @click="onAddDoctor()" >添加</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -89,19 +89,52 @@
       </el-pagination>
     </div>
   </div>
+  <el-dialog title="新增医生信息" :visible.sync="dialogFormVisible">
+    <el-form :model="form">
+      <el-form-item label="姓名" :label-width="formLabelWidth">
+        <el-input v-model="form.name" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="科室" :label-width="formLabelWidth">
+        <el-select v-model="form.region" placeholder="请选择科室">
+          <el-option label="内科" value="Internal"></el-option>
+          <el-option label="外科" value="Surgery"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="备注" :label-width="formLabelWidth">
+        <el-input v-model="form.remark" autocomplete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+    </div>
+  </el-dialog>
 </div>
 </template>
 
 <script>
+// @ is an alias to /src
+
 export default {
 name: "Doctor",
   data(){
   return{
-    visible: false,
+    dialogFormVisible: false,
     message:"数据不存在",
     search_data:{
       doctorName:'',
     },
+    form: {
+      name: '',
+      region: '',
+      date1: '',
+      date2: '',
+      delivery: false,
+      type: [],
+      resource: '',
+      desc: ''
+    },
+    formLabelWidth: '120px',
     paginations:{
       page_index:1, //当前位于哪页
       total:0, //总数
@@ -132,12 +165,15 @@ name: "Doctor",
       option:'edit'
     },
     allTableData:[], //分页数据
-    formDate: {  //添加编辑删除需要传的字段
+    formData: {  //添加编辑删除需要传的字段
       doctorName: "",
       department: "",
       remark: ""
     },
   }
+  },
+  created () {
+    this.getProfiles()
   },
   methods:{
     handleCurrentChange(page){
@@ -154,6 +190,11 @@ name: "Doctor",
         }
         this.tableData = tables;
       }
+    },
+
+    onAddDoctor(){//添加信息
+      console.log("lalal");
+      this.dialogFormVisible=true
     },
     handleSizeChange(page_size){
       this.paginations.page_index = 1;
