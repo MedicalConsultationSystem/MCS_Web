@@ -61,18 +61,6 @@ export default {
     goto(path) {
       this.$router.replace(path)
     },
-    gotoLogin(){
-      this.$router.push('/login')
-    }
-  },
-  backgroundColor() {
-    if (this.sideMode === 'dark') {
-      return '#191a23'
-    } else if (this.sideMode === 'light') {
-      return '#fff'
-    } else {
-      return this.sideMode
-    }
   },
   mounted() {
 
