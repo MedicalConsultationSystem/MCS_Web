@@ -43,7 +43,7 @@
           </el-dropdown>
           <span style="margin-right: 12px">王小虎</span>
         </el-header>
-        <el-main><router-view></router-view></el-main>
+        <el-main style="background: #EDEDED"><router-view></router-view></el-main>
       </el-container>
 
     </el-container>
@@ -83,7 +83,7 @@ export default {
 <style lang="scss">
 @import "Index.scss";
 .el-header {
-  background-color: #B3C0D1;
+  background-color: #fff;
   color: #333;
   line-height: 60px;
   margin-top: 0;
