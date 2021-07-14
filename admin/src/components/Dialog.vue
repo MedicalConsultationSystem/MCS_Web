@@ -4,11 +4,14 @@
       <el-form-item label="姓名" :label-width="formLabelWidth">
         <el-input v-model="formData.doctorName" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="科室" :label-width="formLabelWidth">
-        <el-select v-model="formData.department" placeholder="请选择科室">
-          <el-option v-for="item in formData.depts" :value="item.id" :key="item.id">{{item.label}}</el-option>
-<!--          <el-option label="内科" value="Internal"></el-option>-->
-<!--          <el-option label="外科" value="Surgery"></el-option>-->
+      <el-form-item label="所属科室" :label-width="formLabelWidth">
+        <el-select v-model="formData.department" placeholder="请选择科室" clearable filterable>
+          <el-option v-for="item in formData.depts" :value="item.id" :key="item.id" :label="item.label"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="所属机构" :label-width="formLabelWidth">
+        <el-select v-model="formData.organization" placeholder="请选择机构" clearable filterable>
+          <el-option v-for="item in formData.orgs" :value="item.org_id" :key="item.org_id" :label="item.org_name"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="备注" :label-width="formLabelWidth">

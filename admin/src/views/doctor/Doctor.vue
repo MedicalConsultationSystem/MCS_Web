@@ -35,11 +35,19 @@
       </template>
     </el-table-column>
       <el-table-column
-          label="科室"
+          label="所属科室"
           align="center"
           >
         <template slot-scope="scope">
           <span>{{ scope.row.department }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+          label="所属机构"
+          align="center"
+      >
+        <template slot-scope="scope">
+          <span>{{ scope.row.organization }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -130,61 +138,73 @@ name: "Doctor",
         doctorName:"1JIA1",
         department: "内科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA2",
         department: "外科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA3",
         department: "骨科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA4",
         department: "内科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA5",
         department: "外科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA6",
         department: "骨科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA7",
         department: "内科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA8",
         department: "外科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA9",
         department: "骨科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA10",
         department: "内科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA11",
         department: "外科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
       {
         doctorName:"1JIA12",
         department: "骨科",
         remark:"无",
+        organization:"浙江省第一医院"
       },
     ],
     dialog:{  //弹出框
@@ -192,6 +212,7 @@ name: "Doctor",
       show:false,
       option:'edit'
     },
+
     departments:[
       {
         id:1,
@@ -205,12 +226,74 @@ name: "Doctor",
         id:2,
         label:"骨科"
       }],
+
+    organizations:[
+      {
+        org_id:1,
+        org_name:"浙江省第一医院"
+      },
+      {
+        org_id:2,
+        org_name:"浙江省第二医院"
+      },
+      {
+        org_id:3,
+        org_name:"浙江医院"
+      },
+      {
+        org_id:4,
+        org_name:"杭州市第一人民医院"
+      },
+      {
+        org_id:5,
+        org_name:"杭州市中医院"
+      },
+      {
+        org_id:6,
+        org_name:"浙江省人民医院浙江省立医院"
+      },
+      {
+        org_id:7,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:8,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:9,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:7,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:7,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:7,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:7,
+        org_name:"浙江大学医学院附属第一医院"
+      },
+      {
+        org_id:7,
+        org_name:"浙江大学医学院附属第一医院"
+      }
+    ],
+
     tableData:[], //分页数据
     formData: {  //添加编辑删除需要传的字段
       doctorName: "",
       department: "",
       remark: "",
-      depts:this.departments
+      organization:"",
+      depts:this.departments,
+      orgs:this.organizations
     },
   }
   },
@@ -243,7 +326,9 @@ name: "Doctor",
         doctorName:"",
         department:"",
         remark:"",
-        depts:this.departments
+        organization:"",
+        depts:this.departments,
+        orgs:this.organizations
       }
     },
     handleSizeChange(page_size){
@@ -274,8 +359,10 @@ name: "Doctor",
         doctorName:row.doctorName,
         department:row.department,
         remark:row.remark,
+        organization:row.organization,
         id:row.id,
-        depts:this.departments
+        depts:this.departments,
+        orgs:this.organizations
       }
     },
   }

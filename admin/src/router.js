@@ -31,7 +31,7 @@ const router = new Router({
                     path: '/medicine',
                     name: 'medicine',
                     component: () => import('./views/medicine/Medicine'),
-                }
+                },
             ]
         },
         {
