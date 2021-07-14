@@ -9,17 +9,17 @@
         <el-menu
             default-active="/doctor"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
+            @open="open"
+            @close="close"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b">
           <el-menu-item index="/doctor" @click="goto('/doctor')">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-user"></i>
             <span slot="title">医生</span>
           </el-menu-item>
           <el-menu-item index="/medicine" @click="goto('/medicine')">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-first-aid-kit"></i>
             <span slot="title">药物</span>
           </el-menu-item>
         </el-menu>
@@ -41,7 +41,7 @@
               <el-dropdown-item @click="goto('/login')">登出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>王小虎</span>
+          <span style="margin-right: 12px">王小虎</span>
         </el-header>
         <el-main><router-view></router-view></el-main>
       </el-container>
