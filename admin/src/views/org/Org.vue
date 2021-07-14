@@ -130,7 +130,7 @@ export default {
     },
     onAddDoctor(){//添加信息
       this.dialog={
-        title:'编辑信息',
+        title:'编辑机构信息',
         show:true,
         option:'edit'
       }
@@ -158,7 +158,7 @@ export default {
     },
     handleEdit(index,row) { //编辑信息
       this.dialog={
-        title:'编辑信息',
+        title:'编辑机构信息',
         show:true,
         option:'edit'
       }

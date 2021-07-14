@@ -1,7 +1,7 @@
 <template>
-  <el-dialog :title="dialog.title" :visible.sync="dialog.show">
+  <el-dialog :title="dialog.title" :visible.sync="dialog.show" >
     <el-form :model="formData">
-      <el-form-item label="机构名称" :label-width="formLabelWidth">
+      <el-form-item label="机构名称" :label-width="formLabelWidth" >
         <el-input v-model="formData.orgName" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>

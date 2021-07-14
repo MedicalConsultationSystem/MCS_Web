@@ -1,8 +1,8 @@
 <template>
-  <el-dialog :title="dialog.title" :visible.sync="dialog.show">
+  <el-dialog :title="dialog.title" :visible.sync="dialog.show" >
     <el-form :model="formData">
-      <el-form-item label="药品通用名称" :label-width="formLabelWidth">
-        <el-input v-model="formData.drug_name" autocomplete="off"></el-input>
+      <el-form-item label="药品通用名称" :label-width="formLabelWidth" >
+        <el-input v-model="formData.drug_name" autocomplete="off" ></el-input>
       </el-form-item>
       <el-form-item label="商品名" :label-width="formLabelWidth">
           <el-input v-model="formData.trade_name" autocomplete="off"></el-input>
@@ -22,7 +22,7 @@
         <el-input v-model="formData.dose" type="number" min="0" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="剂量单位" :label-width="formLabelWidth">
-        <el-radio v-model="formData.dose_unit" label="1">g</el-radio>
+        <el-radio v-model="formData.dose_unit" label="1" style="width: 70px">g</el-radio>
         <el-radio v-model="formData.dose_unit" label="2">mg</el-radio>
         <el-radio v-model="formData.dose_unit" label="3">ml</el-radio>
       </el-form-item>
@@ -45,7 +45,7 @@ export default {
   name: "Dialog",
   data(){
     return{
-      formLabelWidth: '120px',
+      formLabelWidth: '100px',
     }
   },
 
@@ -57,5 +57,7 @@ export default {
 </script>
 
 <style scoped>
-
+.el-form-item{
+  style:"width: 40%"
+}
 </style>

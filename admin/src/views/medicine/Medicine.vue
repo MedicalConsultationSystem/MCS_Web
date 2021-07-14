@@ -1,7 +1,7 @@
 <template>
   <div class="toollist">
     <div>
-      <el-form :inline="true" ref="search_data" :model="search_data">
+      <el-form :inline="true" ref="search_data" :model="search_data" >
         <div class="search">
           <el-form-item>
             <el-input
@@ -367,7 +367,7 @@ export default {
     },
     onAddDoctor(){//添加信息
       this.dialog={
-        title:'编辑信息',
+        title:'编辑药物信息',
         show:true,
         option:'edit'
       }
@@ -405,7 +405,7 @@ export default {
     },
     handleEdit(index,row) { //编辑信息
       this.dialog={
-        title:'编辑信息',
+        title:'编辑药物信息',
         show:true,
         option:'edit'
       }
