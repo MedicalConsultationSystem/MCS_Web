@@ -89,34 +89,17 @@
       </el-pagination>
     </div>
   </div>
-  <el-dialog title="新增医生信息" :visible.sync="dialogFormVisible">
-    <el-form :model="form">
-      <el-form-item label="姓名" :label-width="formLabelWidth">
-        <el-input v-model="form.name" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="科室" :label-width="formLabelWidth">
-        <el-select v-model="form.region" placeholder="请选择科室">
-          <el-option label="内科" value="Internal"></el-option>
-          <el-option label="外科" value="Surgery"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="备注" :label-width="formLabelWidth">
-        <el-input v-model="form.remark" autocomplete="off"></el-input>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-    </div>
-  </el-dialog>
+  <Dialog :dialog="dialog" :form-data="formData"></Dialog>
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
+import Dialog from "@/components/Dialog";
 export default {
 name: "Doctor",
+  components: {Dialog},
   data(){
   return{
     dialogFormVisible: false,
@@ -236,10 +219,17 @@ name: "Doctor",
         this.tableData = tables;
       }
     },
-
     onAddDoctor(){//添加信息
-      console.log("lalal");
-      this.dialogFormVisible=true
+      this.dialog={
+        title:'编辑信息',
+        show:true,
+        option:'edit'
+      }
+      this.formData = {
+        doctorName:"",
+        department:"",
+        remark:"",
+      }
     },
     handleSizeChange(page_size){
       this.paginations.page_index = 1;
@@ -265,7 +255,7 @@ name: "Doctor",
         show:true,
         option:'edit'
       }
-      this.formDate = {
+      this.formData = {
         doctorName:row.doctorName,
         department:row.department,
         remark:row.remark,
