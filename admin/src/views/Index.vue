@@ -23,14 +23,6 @@
             <span slot="title">药物</span>
           </el-menu-item>
         </el-menu>
-<!--        <el-menu :default-openeds="['1', '3']">-->
-<!--          <el-submenu index="/doctor" >-->
-<!--            <template slot="title" @click="goto('/doctor')"><i class="el-icon-message"></i>医生</template>-->
-<!--          </el-submenu>-->
-<!--          <el-submenu index="/medicine">-->
-<!--            <template slot="title" @click="goto('/medicine')"><i class="el-icon-menu"></i>药物</template>-->
-<!--          </el-submenu>-->
-<!--        </el-menu>-->
       </el-aside>
 
       <el-container>
@@ -38,7 +30,11 @@
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click="goto('/login')">登出</el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link to="/login">
+                  登出
+                  </router-link>
+                </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <span style="margin-right: 12px">王小虎</span>
@@ -64,6 +60,9 @@ export default {
   methods: {
     goto(path) {
       this.$router.replace(path)
+    },
+    gotoLogin(){
+      this.$router.push('/login')
     }
   },
   backgroundColor() {
