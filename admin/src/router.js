@@ -32,6 +32,16 @@ const router = new Router({
                     name: 'medicine',
                     component: () => import('./views/medicine/Medicine'),
                 },
+                {
+                    path: '/dept',
+                    name: 'dept',
+                    component: () => import('./views/dept/Dept'),
+                },
+                {
+                    path: '/org',
+                    name: 'org',
+                    component: () => import('./views/org/Org'),
+                },
             ]
         },
         {

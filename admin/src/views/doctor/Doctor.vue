@@ -118,7 +118,6 @@ name: "Doctor",
   components: {Dialog},
   data(){
   return{
-    dialogFormVisible: false,
     message:"数据不存在",
     search_data:{
       doctorName:'',
@@ -243,7 +242,7 @@ name: "Doctor",
         label:"外科"
       },
       {
-        id:2,
+        id:3,
         label:"骨科"
       }],
 

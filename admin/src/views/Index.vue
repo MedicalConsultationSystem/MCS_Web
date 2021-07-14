@@ -22,6 +22,14 @@
             <i class="el-icon-first-aid-kit"></i>
             <span slot="title">药物</span>
           </el-menu-item>
+          <el-menu-item index="/dept" @click="goto('/dept')">
+            <i class="el-icon-office-building"></i>
+            <span slot="title">科室</span>
+          </el-menu-item>
+          <el-menu-item index="/org" @click="goto('/org')">
+            <i class="el-icon-school"></i>
+            <span slot="title">机构</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
 
