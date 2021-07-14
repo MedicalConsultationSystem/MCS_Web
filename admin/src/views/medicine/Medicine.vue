@@ -61,7 +61,7 @@
         <el-table-column
             label="药品价格"
             align="center"
-            width="200">
+            >
           <template slot-scope="scope">
             <span>{{ scope.row.price }}</span>
           </template>
@@ -69,7 +69,7 @@
         <el-table-column
             label="剂量"
             align="center"
-            width="200">
+            >
           <template slot-scope="scope">
             <span>{{ scope.row.dose }}</span>
           </template>
@@ -77,7 +77,7 @@
         <el-table-column
             label="剂量单位"
             align="center"
-            width="200">
+            >
           <template slot-scope="scope">
             <span>{{ scope.row.dose_unit }}</span>
           </template>
@@ -85,7 +85,7 @@
         <el-table-column
             label="产地"
             align="center"
-            width="200">
+            >
           <template slot-scope="scope">
             <span>{{ scope.row.factory_name }}</span>
           </template>
@@ -93,7 +93,7 @@
         <el-table-column
             label="批准文号"
             align="center"
-            width="200">
+            >
           <template slot-scope="scope">
             <span>{{ scope.row.approval_number }}</span>
           </template>
