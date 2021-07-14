@@ -192,11 +192,25 @@ name: "Doctor",
       show:false,
       option:'edit'
     },
+    departments:[
+      {
+        id:1,
+        label:"内科"
+      },
+      {
+        id:2,
+        label:"外科"
+      },
+      {
+        id:2,
+        label:"骨科"
+      }],
     tableData:[], //分页数据
     formData: {  //添加编辑删除需要传的字段
       doctorName: "",
       department: "",
-      remark: ""
+      remark: "",
+      depts:this.departments
     },
   }
   },
@@ -229,6 +243,7 @@ name: "Doctor",
         doctorName:"",
         department:"",
         remark:"",
+        depts:this.departments
       }
     },
     handleSizeChange(page_size){
@@ -259,7 +274,8 @@ name: "Doctor",
         doctorName:row.doctorName,
         department:row.department,
         remark:row.remark,
-        id:row.id
+        id:row.id,
+        depts:this.departments
       }
     },
   }

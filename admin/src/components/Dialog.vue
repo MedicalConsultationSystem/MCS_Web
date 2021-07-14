@@ -6,8 +6,9 @@
       </el-form-item>
       <el-form-item label="科室" :label-width="formLabelWidth">
         <el-select v-model="formData.department" placeholder="请选择科室">
-          <el-option label="内科" value="Internal"></el-option>
-          <el-option label="外科" value="Surgery"></el-option>
+          <el-option v-for="item in formData.depts" :value="item.id" :key="item.id">{{item.label}}</el-option>
+<!--          <el-option label="内科" value="Internal"></el-option>-->
+<!--          <el-option label="外科" value="Surgery"></el-option>-->
         </el-select>
       </el-form-item>
       <el-form-item label="备注" :label-width="formLabelWidth">
