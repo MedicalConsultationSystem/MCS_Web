@@ -6,7 +6,7 @@
           <el-form-item>
             <el-input
                 v-model="searchData"
-                placeholder="请输入科室姓名">
+                placeholder="请输入科室名称">
             </el-input>
           </el-form-item>
           <el-form-item>

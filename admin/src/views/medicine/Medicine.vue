@@ -6,7 +6,7 @@
           <el-form-item>
             <el-input
                 v-model="name"
-                placeholder="请输入药物姓名">
+                placeholder="请输入药物名称">
             </el-input>
           </el-form-item>
           <el-form-item>
