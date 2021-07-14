@@ -11,9 +11,9 @@
         <el-input v-model="formData.specification" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="包装单位" :label-width="formLabelWidth">
-        <el-select v-model="formData.pack_unit" placeholder="请选择包装单位" clearable filterable>
-          <el-option v-for="item in formData.pack_units" :value="item.id" :key="item.id" :label="item.pack_unit"></el-option>
-        </el-select>
+        <el-radio v-model="formData.pack_unit" label="1">盒</el-radio>
+        <el-radio v-model="formData.pack_unit" label="2">支</el-radio>
+        <el-radio v-model="formData.pack_unit" label="3">瓶</el-radio>
       </el-form-item>
       <el-form-item label="药品价格" :label-width="formLabelWidth">
         <el-input v-model="formData.price" type="number" min="0" autocomplete="off"></el-input>
@@ -22,7 +22,9 @@
         <el-input v-model="formData.dose" type="number" min="0" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="剂量单位" :label-width="formLabelWidth">
-        <el-input v-model="formData.dose_unit" autocomplete="off"></el-input>
+        <el-radio v-model="formData.dose_unit" label="1">g</el-radio>
+        <el-radio v-model="formData.dose_unit" label="2">mg</el-radio>
+        <el-radio v-model="formData.dose_unit" label="3">ml</el-radio>
       </el-form-item>
       <el-form-item label="产地" :label-width="formLabelWidth">
         <el-input v-model="formData.factory_name" autocomplete="off"></el-input>
