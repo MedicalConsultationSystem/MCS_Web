@@ -35,6 +35,14 @@
       </template>
     </el-table-column>
       <el-table-column
+          label="职称"
+          align="center"
+      >
+        <template slot-scope="scope">
+          <span>{{ scope.row.doctorLevel }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
           label="所属科室"
           align="center"
           >
@@ -138,73 +146,85 @@ name: "Doctor",
         doctorName:"1JIA1",
         department: "内科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA2",
         department: "外科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA3",
         department: "骨科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA4",
         department: "内科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA5",
         department: "外科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA6",
         department: "骨科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA7",
         department: "内科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA8",
         department: "外科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA9",
         department: "骨科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA10",
         department: "内科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA11",
         department: "外科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
       {
         doctorName:"1JIA12",
         department: "骨科",
         remark:"无",
-        organization:"浙江省第一医院"
+        organization:"浙江省第一医院",
+        doctorLevel:"医师",
       },
     ],
     dialog:{  //弹出框
@@ -292,6 +312,7 @@ name: "Doctor",
       department: "",
       remark: "",
       organization:"",
+      doctorLevel:"",
       depts:this.departments,
       orgs:this.organizations
     },
@@ -327,6 +348,7 @@ name: "Doctor",
         department:"",
         remark:"",
         organization:"",
+        doctorLevel: "",
         depts:this.departments,
         orgs:this.organizations
       }
@@ -359,6 +381,7 @@ name: "Doctor",
         doctorName:row.doctorName,
         department:row.department,
         remark:row.remark,
+        doctorLevel: row.doctorLevel,
         organization:row.organization,
         id:row.id,
         depts:this.departments,

@@ -4,6 +4,11 @@
       <el-form-item label="姓名" :label-width="formLabelWidth">
         <el-input v-model="formData.doctorName" autocomplete="off"></el-input>
       </el-form-item>
+      <el-form-item label="职称" :label-width="formLabelWidth">
+        <el-select v-model="formData.doctorLevel" placeholder="请选择职称">
+          <el-option v-for="item in doctorLevels" :value="item.id" :key="item.id" :label="item.label"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="所属科室" :label-width="formLabelWidth">
         <el-select v-model="formData.department" placeholder="请选择科室" clearable filterable>
           <el-option v-for="item in formData.depts" :value="item.id" :key="item.id" :label="item.label"></el-option>
@@ -31,8 +36,35 @@ name: "Dialog",
   data(){
   return{
     formLabelWidth: '120px',
+    doctorLevels:[
+      {
+        id:1,
+        label:"医士"
+      },
+      {
+        id:2,
+        label:"医师"
+      },
+      {
+        id:3,
+        label:"住院医师"
+      },
+      {
+        id:4,
+        label:"主治医师"
+      },
+      {
+        id:5,
+        label:"副主任医师"
+      },
+      {
+        id:6,
+        label:"主任医师"
+      },
+    ],
   }
   },
+
   props:{
   dialog:Object,
     formData:Object
