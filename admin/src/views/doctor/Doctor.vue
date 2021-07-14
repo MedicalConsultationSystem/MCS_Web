@@ -138,11 +138,11 @@ name: "Doctor",
     paginations:{
       page_index:1, //当前位于哪页
       total:0, //总数
-      page_size:5, //一页显示多少条
-      page_sizes:[5,10,15,20], //每页显示多少条
+      page_size:10, //一页显示多少条
+      page_sizes:[10,15,20], //每页显示多少条
       layout:'total, sizes, prev, pager, next, jumper'
     },
-    tableData: [
+    allTableData: [
       {
         doctorName:"1JIA1",
         department: "内科",
@@ -154,7 +154,52 @@ name: "Doctor",
         remark:"无",
       },
       {
-        doctorName:"1JIA1",
+        doctorName:"1JIA3",
+        department: "骨科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA4",
+        department: "内科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA5",
+        department: "外科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA6",
+        department: "骨科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA7",
+        department: "内科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA8",
+        department: "外科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA9",
+        department: "骨科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA10",
+        department: "内科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA11",
+        department: "外科",
+        remark:"无",
+      },
+      {
+        doctorName:"1JIA12",
         department: "骨科",
         remark:"无",
       },
@@ -164,7 +209,7 @@ name: "Doctor",
       show:false,
       option:'edit'
     },
-    allTableData:[], //分页数据
+    tableData:[], //分页数据
     formData: {  //添加编辑删除需要传的字段
       doctorName: "",
       department: "",
@@ -173,7 +218,7 @@ name: "Doctor",
   }
   },
   created () {
-    this.getProfiles()
+    this.setPaginations();
   },
   methods:{
     handleCurrentChange(page){
@@ -202,6 +247,17 @@ name: "Doctor",
       this.tableData = this.allTableData.filter((item,index) => {
         return index < page_size;
       })
+    },
+    setPaginations(){
+      //分页属性设置
+      this.paginations.total = this.allTableData.length; //数据的数量
+      this.paginations.page_index = 1; //默认显示第一页
+      this.paginations.page_size = 10; //每页显示的数据
+      //数据显示
+      this.tableData = this.allTableData.filter((item,index) => {
+        return index < this.paginations.page_size;
+      })
+
     },
     handleEdit(index,row) { //编辑信息
       this.dialog={
