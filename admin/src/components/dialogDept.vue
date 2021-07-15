@@ -1,13 +1,13 @@
 <template>
   <el-dialog :title="dialog.title" :visible.sync="dialog.show">
-    <el-form :model="formData">
+    <el-form :model="formData" ref="dialogData" :rules="formDialog">
       <el-form-item label="科室名称" :label-width="formLabelWidth">
-        <el-input v-model="formData.deptName" autocomplete="off"></el-input>
+        <el-input v-model="formData.dept_name" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialog.show = false">取 消</el-button>
-      <el-button type="primary" @click="dialog.show = false">确 定</el-button>
+      <el-button type="primary" @click="dialogAdd('dialogData')">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -18,6 +18,34 @@ export default {
   data(){
     return{
       formLabelWidth: '120px',
+      formDialog: {
+        deptName: [{ required: true, message: "科室名称不能为空", trigger: "blur" }],
+      }
+    }
+  },
+  methods:{
+    dialogAdd(dialogData){
+      this.$refs[dialogData].validate(valid =>{
+        if(valid){
+          console.log(this.formData)
+          let reqJson= JSON.stringify(this.formData)
+          console.log(reqJson)
+          console.log(typeof (reqJson))
+          this.$axios.post('https://api.zghy.xyz/dept/add',reqJson,{headers:{'Content-Type':'application/raw'}})
+          .then(res =>{
+            console.log(res);
+            this.$message({
+              message: "添加信息成功",
+              type: "success"
+            });
+          })
+          this.dialog.show = false;
+          // 更新数据
+          this.$emit("update"); //传递父组件,进行视图更新
+          //情况内容
+          this.formData = "";
+        }
+      })
     }
   },
 

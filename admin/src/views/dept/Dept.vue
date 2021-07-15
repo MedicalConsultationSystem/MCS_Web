@@ -207,6 +207,9 @@ export default {
         deptName:row.deptName
       }
     },
+    handleDelete(){
+
+    }
   }
 }
 </script>
