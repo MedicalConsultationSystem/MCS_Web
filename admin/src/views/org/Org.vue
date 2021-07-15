@@ -71,6 +71,18 @@
           </template>
         </el-table-column>
       </el-table>
+      <div v-else class="txt">{{message}}</div>
+      <div class="paginations">
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="paginations.page_index"
+            :page-sizes="paginations.page_sizes"
+            :page-size="paginations.page_size"
+            :layout="paginations.layout"
+            :total="paginations.total">
+        </el-pagination>
+      </div>
     </div>
     <Dialog :dialog="dialog" :form-data="formData"></Dialog>
   </div>
