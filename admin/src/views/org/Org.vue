@@ -32,7 +32,7 @@
             width="80px"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.orgNo }}</span>
+            <span>{{ scope.row.org_id }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -41,7 +41,7 @@
             style="text-align: justify;margin: 30px"
         >
           <template slot-scope="scope" style="text-align: justify;margin: 30px ">
-            <span style="text-align: justify;margin: 30px">{{ scope.row.orgName }}</span>
+            <span style="text-align: justify;margin: 30px">{{ scope.row.org_name }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -84,7 +84,7 @@
         </el-pagination>
       </div>
     </div>
-    <Dialog :dialog="dialog" :form-data="formData"></Dialog>
+    <Dialog :dialog="dialog" :form-data="formData" @update="getMsg"></Dialog>
   </div>
 </template>
 
@@ -107,24 +107,7 @@ export default {
         page_sizes:[10,15,20], //每页显示多少条
         layout:'total, sizes, prev, pager, next, jumper'
       },
-      allTableData:[
-        {
-          orgNo:1,
-          orgName:"浙江省第一医院"
-        },
-        {
-          orgNo:2,
-          orgName:"浙江医院"
-        },
-        {
-          orgNo:3,
-          orgName:"杭州市中医院"
-        },
-        {
-          orgNo:4,
-          orgName:"浙江省人民医院浙江省立医院"
-        }
-      ],
+      allTableData:[],
       dialog:{  //弹出框
         title:'',
         show:false,
@@ -138,8 +121,30 @@ export default {
   },
   created () {
     this.setPaginations();
+    this.getMsg();
   },
   methods:{
+    getMsg(){
+      this.$axios
+          .get('https://api.zghy.xyz/organization/listAll')
+          .then(res => {
+            console.log(res);
+            if(res.data.msg==="机构信息获取成功"){
+              this.$message({
+                message: '机构信息获取成功',
+                type: 'success'
+              });
+              console.log(JSON.stringify(res.data.data))
+              console.log(this.allTableData)
+              this.allTableData=res.data.data
+              console.log(this.allTableData);
+              this.setPaginations();
+            }
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+    },
     handleCurrentChange(page){
       //获取当前页
       let index = this.paginations.page_size * (page -1);
