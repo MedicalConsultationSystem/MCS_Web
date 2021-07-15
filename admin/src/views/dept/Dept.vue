@@ -56,18 +56,8 @@
             <el-button
                 size="small"
                 type="danger"
+                @click="open(scope.$index, scope.row)"
             >删除</el-button>
-            <!-- <el-popover
-              placement="top"
-              width="160"
-              v-model="visible">
-              <p>确定要删除吗？</p>
-              <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-                <el-button type="primary" size="mini" @click="getDeleteVisible(scope.$index, scope.row)">确定</el-button>
-              </div>
-              <el-button slot="reference" @click="handleDelete(scope.row)">删除</el-button>
-            </el-popover> -->
           </template>
         </el-table-column>
       </el-table>
@@ -91,6 +81,7 @@
 <script>
 import Dialog from "@/components/dialogDept";
 export default {
+  inject: ['reload'],
   name: "Dept",
   components: {Dialog},
   data() {
@@ -118,7 +109,7 @@ export default {
       },
       tableData:[], //分页数据
       formData : {
-        deptName:""
+        dept_name:""
       }
     }
   },
@@ -130,6 +121,27 @@ export default {
 
   },
   methods:{
+    open(index,row) {
+      this.$confirm('此操作将永久删除该科室信息，是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+       let msg=this.handleDelete(index,row)
+        if(msg==="success"){
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          this.reload()
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
     getMsg(){
       this.$axios
           .get('https://api.zghy.xyz/dept/listAll')
@@ -175,7 +187,7 @@ export default {
         option:'edit'
       }
       this.formData = {
-        deptName:""
+        dept_name:""
       }
 
     },
@@ -203,13 +215,31 @@ export default {
         show:true,
         option:'edit'
       }
-      console.log("lalal")
       this.formData = {
-        deptName:row.deptName
+        dept_name:row.dept_name
       }
     },
-    handleDelete(){
-
+    handleDelete(index,row){
+      let reqJson={
+        dept_id:row.dept_id,
+        dept_name:row.dept_name
+      }
+      console.log(reqJson);
+      reqJson.dept_id=parseInt(reqJson.dept_id);
+      console.log(typeof(reqJson.dept_id))
+      reqJson=JSON.stringify(reqJson)
+      this.$axios.delete('https://api.zghy.xyz/dept/deleteDept',{data:reqJson})
+      .then(res =>{
+        console.log(res);
+        let msg="success";
+        if(res.data.code===200){
+          this.$message({
+            message: "删除科室信息成功",
+            type: "success"
+          });
+          return msg;
+        }
+      })
     }
   }
 }
