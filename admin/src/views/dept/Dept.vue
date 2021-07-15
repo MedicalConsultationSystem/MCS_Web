@@ -86,6 +86,7 @@ export default {
       search_data:{
         doctorName:'',
       },
+      info:"",
       message:"数据不存在",
       formLabelWidth: '120px',
       paginations:{
@@ -126,6 +127,17 @@ export default {
   },
   created () {
     this.setPaginations();
+  },
+  mounted() {
+    this.$axios
+        .get('https://api.zghy.xyz/dept/listAll')
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+    console.log(this.info)
   },
   methods:{
     handleCurrentChange(page){
