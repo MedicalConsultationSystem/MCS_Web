@@ -27,16 +27,27 @@
           :default-sort = "{prop: 'date', order: 'descending'}"
           style="width: 100%">
         <el-table-column
-            label="科室名称"
+            label="序号"
             align="center"
+            width="80px"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.deptName }}</span>
+            <span>{{ scope.row.deptNo }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="科室名称"
+            align="justify"
+            style="text-align: justify;margin: 30px"
+        >
+          <template slot-scope="scope" style="text-align: justify;margin: 30px ">
+            <span style="text-align: justify;margin: 30px ">{{ scope.row.deptName }}</span>
           </template>
         </el-table-column>
         <el-table-column
             align="center"
-            label="操作">
+            label="操作"
+        width="160px">
           <template slot-scope="scope">
             <el-button
                 type="primary"
@@ -86,15 +97,19 @@ export default {
       },
       allTableData:[
           {
+            deptNo:1,
             deptName:"内科"
       },
         {
+          deptNo:2,
           deptName:"外科"
         },
         {
+          deptNo:2,
           deptName:"骨科"
         },
         {
+          deptNo:2,
           deptName:"儿科"
         }
       ],

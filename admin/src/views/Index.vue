@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-container style="height: 950px">
-      <el-aside style="background: #304156;width: 160px">
+      <el-aside style="background: #304156;width: 160px;align:center" >
         <div class="title" style="background: #304156;width: 160px">
-<!--          <img alt class="logoimg" :src="$GIN_VUE_ADMIN.appLogo">-->
+          <img alt class="logoimg" src="@/assets/avatar.png"/>
           <p class="tit-text" :style="{color:'#fff'}">MCS</p>
         </div>
         <el-menu
@@ -35,9 +35,9 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 13px ;position: relative ;">
-          <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-header  class="navbar">
+          <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+            <i class="el-icon-setting" style="margin-left: 1600px;position: relative"></i>
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
                   <router-link to="/login">
@@ -46,7 +46,7 @@
                 </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span style="margin-right: 12px">王小虎</span>
+          <span style="margin-left: 16px">王小虎</span>
         </el-header>
         <el-main style="background: #EDEDED"><router-view></router-view></el-main>
       </el-container>
@@ -84,5 +84,86 @@ export default {
   line-height: 60px;
   margin-top: 0;
   padding: 0;
+}
+.navbar {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+
+  .hamburger-container {
+    line-height: 46px;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+    transition: background .3s;
+    -webkit-tap-highlight-color:transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, .025)
+    }
+  }
+
+  .breadcrumb-container {
+    float: left;
+  }
+
+  .errLog-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .right-menu {
+    float: right;
+    height: 100%;
+    line-height: 50px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .right-menu-item {
+      display: inline-block;
+      padding: 0 8px;
+      height: 100%;
+      font-size: 18px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+
+      &.hover-effect {
+        cursor: pointer;
+        transition: background .3s;
+
+        &:hover {
+          background: rgba(0, 0, 0, .025)
+        }
+      }
+    }
+
+    .avatar-container {
+      margin-right: 30px;
+
+      .avatar-wrapper {
+        margin-top: 5px;
+        position: relative;
+
+        .user-avatar {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+
+        .el-icon-caret-bottom {
+          cursor: pointer;
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
 </style>

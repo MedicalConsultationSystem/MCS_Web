@@ -14,7 +14,7 @@ const router = new Router({
             name: 'Index',
             component: () => import('./views/Index.vue'),
             meta: { title: '首页' },
-            redirect: '/home',
+            redirect: '/doctor',
             children: [
                 {
                     path: '/home',
