@@ -84,7 +84,7 @@
         </el-pagination>
       </div>
     </div>
-    <Dialog :dialog="dialog" :form-data="formData"></Dialog>
+    <Dialog :dialog="dialog" :form-data="formData" @update="getMsg"></Dialog>
   </div>
 </template>
 
@@ -110,12 +110,7 @@ export default {
         page_sizes:[10,15,20], //每页显示多少条
         layout:'total, sizes, prev, pager, next, jumper'
       },
-      allTableData:[
-        {
-          "dept_id":1,
-          "dept_name":"lala"
-        }
-      ],
+      allTableData:[],
       dialog:{  //弹出框
         title:'',
         show:false,
@@ -129,30 +124,33 @@ export default {
   },
   created () {
     this.setPaginations();
-    this.$axios
-        .get('https://api.zghy.xyz/dept/listAll')
-        .then((res)=>{
-          console.log(res);
-          if(res.data.msg==="科室信息获取成功"){
-            this.$message({
-              message: '科室信息获取成功',
-              type: 'success'
-            });
-            console.log(JSON.stringify(res.data.data))
-            console.log(this.allTableData)
-            this.allTableData=res.data.data
-            console.log(this.allTableData)
-          }
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-    console.log(this.info)
+    this.getMsg();
   },
   mounted() {
 
   },
   methods:{
+    getMsg(){
+      this.$axios
+          .get('https://api.zghy.xyz/dept/listAll')
+          .then(res => {
+            console.log(res);
+            if(res.data.msg==="科室信息获取成功"){
+            this.$message({
+              message: '科室信息获取成功',
+              type: 'success'
+            });
+              console.log(JSON.stringify(res.data.data))
+              console.log(this.allTableData)
+              this.allTableData=res.data.data
+              console.log(this.allTableData);
+              this.setPaginations();
+            }
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+    },
     handleCurrentChange(page){
       //获取当前页
       let index = this.paginations.page_size * (page -1);
