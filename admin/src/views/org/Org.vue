@@ -56,18 +56,8 @@
             <el-button
                 size="small"
                 type="danger"
+                @click="open(scope.$index, scope.row)"
             >删除</el-button>
-            <!-- <el-popover
-              placement="top"
-              width="160"
-              v-model="visible">
-              <p>确定要删除吗？</p>
-              <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-                <el-button type="primary" size="mini" @click="getDeleteVisible(scope.$index, scope.row)">确定</el-button>
-              </div>
-              <el-button slot="reference" @click="handleDelete(scope.row)">删除</el-button>
-            </el-popover> -->
           </template>
         </el-table-column>
       </el-table>
@@ -193,10 +183,51 @@ export default {
         show:true,
         option:'edit'
       }
-      console.log("lalal")
       this.formData = {
-        orgName:row.orgName
+        org_name:row.org_name
       }
+    },
+    handleDelete(index,row){
+      let reqJson={
+        org_id:row.org_id,
+        org_name:row.org_name
+      }
+      console.log(reqJson);
+      reqJson.org_id=parseInt(reqJson.org_id);
+      console.log(typeof(reqJson.org_id))
+      reqJson=JSON.stringify(reqJson)
+      this.$axios.delete('https://api.zghy.xyz/organization/deleteOrg',{data:reqJson})
+          .then(res =>{
+            console.log(res);
+            let msg="success";
+            if(res.data.code===200){
+              this.$message({
+                message: "删除机构信息成功",
+                type: "success"
+              });
+              return msg;
+            }
+          })
+    },
+    open(index,row) {
+      this.$confirm('此操作将永久删除该机构信息，是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let msg=this.handleDelete(index,row)
+        if(msg==="success"){
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     },
   }
 }

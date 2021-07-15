@@ -81,7 +81,6 @@
 <script>
 import Dialog from "@/components/dialogDept";
 export default {
-  inject: ['reload'],
   name: "Dept",
   components: {Dialog},
   data() {
@@ -133,7 +132,6 @@ export default {
             type: 'success',
             message: '删除成功!'
           });
-          this.reload()
         }
       }).catch(() => {
         this.$message({
