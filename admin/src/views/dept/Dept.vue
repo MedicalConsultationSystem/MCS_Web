@@ -32,7 +32,7 @@
             width="80px"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.deptNo }}</span>
+            <span>{{ scope.row.dept_id }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -41,7 +41,7 @@
             style="text-align: justify;margin: 30px"
         >
           <template slot-scope="scope" style="text-align: justify;margin: 30px ">
-            <span style="text-align: justify;margin: 30px ">{{ scope.row.deptName }}</span>
+            <span style="text-align: justify;margin: 30px ">{{ scope.row.dept_name }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -71,6 +71,18 @@
           </template>
         </el-table-column>
       </el-table>
+      <div v-else class="txt">{{message}}</div>
+      <div class="paginations">
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="paginations.page_index"
+            :page-sizes="paginations.page_sizes"
+            :page-size="paginations.page_size"
+            :layout="paginations.layout"
+            :total="paginations.total">
+        </el-pagination>
+      </div>
     </div>
     <Dialog :dialog="dialog" :form-data="formData"></Dialog>
   </div>
@@ -87,6 +99,8 @@ export default {
         doctorName:'',
       },
       info:"",
+      dept_id:null,
+      dept_name:"",
       message:"数据不存在",
       formLabelWidth: '120px',
       paginations:{
@@ -97,21 +111,9 @@ export default {
         layout:'total, sizes, prev, pager, next, jumper'
       },
       allTableData:[
-          {
-            deptNo:1,
-            deptName:"内科"
-      },
         {
-          deptNo:2,
-          deptName:"外科"
-        },
-        {
-          deptNo:2,
-          deptName:"骨科"
-        },
-        {
-          deptNo:2,
-          deptName:"儿科"
+          "dept_id":1,
+          "dept_name":"lala"
         }
       ],
       dialog:{  //弹出框
@@ -127,17 +129,28 @@ export default {
   },
   created () {
     this.setPaginations();
-  },
-  mounted() {
     this.$axios
         .get('https://api.zghy.xyz/dept/listAll')
         .then((res)=>{
-            console.log(res)
+          console.log(res);
+          if(res.data.msg==="科室信息获取成功"){
+            this.$message({
+              message: '科室信息获取成功',
+              type: 'success'
+            });
+            console.log(JSON.stringify(res.data.data))
+            console.log(this.allTableData)
+            this.allTableData=res.data.data
+            console.log(this.allTableData)
+          }
         })
         .catch((error)=>{
           console.log(error)
         })
     console.log(this.info)
+  },
+  mounted() {
+
   },
   methods:{
     handleCurrentChange(page){
@@ -148,6 +161,8 @@ export default {
       let nums = this.paginations.page_size * page;
       //容器
       let tables = [];
+      console.log("1");
+      console.log(this.allTableData);
       for(let i = index; i < nums; i++) {
         if(this.allTableData[i]) {
           tables.push(this.allTableData[i])
