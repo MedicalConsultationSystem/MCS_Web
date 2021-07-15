@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-container style="height: 950px">
+    <el-container style="height: 926px">
       <el-aside style="background: #304156;width: 160px;align:center" >
         <div class="title" style="background: #304156;width: 160px">
           <img alt class="logoimg" src="@/assets/avatar.png"/>
