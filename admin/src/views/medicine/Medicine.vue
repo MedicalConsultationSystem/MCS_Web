@@ -69,6 +69,7 @@
         <el-table-column
             label="剂量"
             align="center"
+            width="90px"
             >
           <template slot-scope="scope">
             <span>{{ scope.row.dose }}</span>
