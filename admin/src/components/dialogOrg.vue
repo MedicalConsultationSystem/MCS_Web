@@ -34,16 +34,18 @@ export default {
           this.$axios.post('https://api.zghy.xyz/organization/add',reqJson,{headers:{'Content-Type':'application/raw'}})
               .then(res =>{
                 console.log(res);
-                this.$message({
-                  message: "添加机构信息成功",
-                  type: "success"
-                });
+                if(res.data.code===0){
+                  this.$message({
+                    message: "添加机构信息成功",
+                    type: "success"
+                  });
+                  this.dialog.show = false;
+                  // 更新数据
+                  this.$emit("update"); //传递父组件,进行视图更新
+                  //情况内容
+                  this.formData = "";
+                }
               })
-          this.dialog.show = false;
-          // 更新数据
-          this.$emit("update"); //传递父组件,进行视图更新
-          //情况内容
-          this.formData = "";
         }
       })
     },
