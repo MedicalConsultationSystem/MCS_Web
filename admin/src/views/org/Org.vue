@@ -27,16 +27,27 @@
           :default-sort = "{prop: 'date', order: 'descending'}"
           style="width: 100%">
         <el-table-column
-            label="机构名称"
+            label="序号"
             align="center"
+            width="80px"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.orgName }}</span>
+            <span>{{ scope.row.orgNo }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="机构名称"
+            align="justify"
+            style="text-align: justify;margin: 30px"
+        >
+          <template slot-scope="scope" style="text-align: justify;margin: 30px ">
+            <span style="text-align: justify;margin: 30px">{{ scope.row.orgName }}</span>
           </template>
         </el-table-column>
         <el-table-column
             align="center"
-            label="操作">
+            label="操作"
+            width="160px">
           <template slot-scope="scope">
             <el-button
                 type="primary"
@@ -86,15 +97,19 @@ export default {
       },
       allTableData:[
         {
+          orgNo:1,
           orgName:"浙江省第一医院"
         },
         {
+          orgNo:2,
           orgName:"浙江医院"
         },
         {
+          orgNo:3,
           orgName:"杭州市中医院"
         },
         {
+          orgNo:4,
           orgName:"浙江省人民医院浙江省立医院"
         }
       ],

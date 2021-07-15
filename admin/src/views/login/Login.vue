@@ -1,42 +1,40 @@
 <template>
-  <div id="userLayout">
-    <div class="page-login--layer page-login--layer-area">
-      <ul class="circles">
-        <li v-for="n in 10" :key="n"></li>
-      </ul>
-    </div>
-    <div class="login_panel">
-      <div class="login_panel_form">
-        <el-form
-            ref="loginForm"
-            :model="loginForm"
-            :rules="rules"
-            @keyup.enter.native="submitForm"
-        >
-          <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="请输入用户名">
-              <i slot="suffix" class="el-input__icon el-icon-user" />
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input
-                v-model="loginForm.password"
-                placeholder="请输入密码"
-            >
-            </el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button
-                type="primary"
-                style="width: 46%;margin-left:8%"
-                @click="submitForm"
-            >登 录</el-button>
-          </el-form-item>
-        </el-form>
+    <div class="userLayout">
+      <div class="login_panel">
+        <div class="login_panel_form">
+          <div class="login_panel_form_title">
+            <img class="login_panel_form_title_logo" src="@/assets/avatar.png" alt=""><p class="login_panel_form_title_p">MCS_ADMIN</p>
+          </div>
+          <el-form
+              ref="loginForm"
+              :model="loginForm"
+              :rules="rules"
+              @keyup.enter.native="submitForm"
+          >
+            <el-form-item prop="username">
+              <el-input v-model="loginForm.username" placeholder="请输入用户名">
+                <i slot="suffix" class="el-input__icon el-icon-user" />
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input
+                  v-model="loginForm.password"
+                  placeholder="请输入密码"
+              >
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                  type="primary"
+                  style="width: 46%;margin-left:8%"
+                  @click="submitForm"
+              >登 录</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div class="login_panel_right"/>
       </div>
-      <div class="login_panel_right"/>
     </div>
-  </div>
 </template>
 
 <script>
@@ -89,18 +87,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "newLogin.scss";
-.page-login--layer {
-  @extend %full;
-  overflow: auto;
-}
-%full {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-}
-.page-login--layer-area {
-  overflow: hidden;
-}
 </style>
