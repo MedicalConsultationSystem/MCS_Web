@@ -43,6 +43,15 @@
           </template>
         </el-table-column>
         <el-table-column
+            label="拼音码"
+            align="center"
+            width="100px"
+        >
+          <template slot-scope="scope">
+            <span>{{ scope.row.pinyin_code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
             label="药品规格"
             align="center"
         >
@@ -150,7 +159,7 @@
 
 import Dialog from "@/components/dialogMedicine";
 export default {
-  name: "Doctor",
+  name: "Medicine",
   components: {Dialog},
   data(){
     return{
@@ -195,140 +204,7 @@ export default {
           dose_unit:"ml"
         },
       ],
-      allTableData: [
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-        {
-          drug_name:"肠炎宁片",
-          trade_name: "[康恩贝]肠炎宁片",
-          specification:"0.42g*48片",
-          pack_unit:"盒",
-          price:"30.00",
-          dose:"0.42",
-          dose_unit:"g",
-          factory_name:"江西康恩贝中药有限公司",
-          approval_number:"国药准字Z36020518",
-        },
-      ],
+      allTableData: [],
       dialog:{  //弹出框
         title:'',
         show:false,
@@ -344,6 +220,7 @@ export default {
         dose_unit:"",
         factory_name:"",
         approval_number:"",
+        pinyin_code:"",
         pack_units:this.pack_units,
         dose_units:this.dose_units
       },
@@ -407,6 +284,7 @@ export default {
         dose_unit:"",
         factory_name:"",
         approval_number:"",
+        pinyin_code:"",
         pack_units:this.pack_units,
         dose_units:this.dose_units
       }
@@ -441,6 +319,7 @@ export default {
         specification:row.specification,
         pack_unit:row.pack_unit,
         price:row.price,
+        pinyin_code:row.pinyin_code,
         dose:row.dose,
         dose_unit:row.dose_unit,
         factory_name:row.factory_name,
