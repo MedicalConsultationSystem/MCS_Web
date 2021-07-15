@@ -53,6 +53,7 @@
         <el-table-column
             label="包装单位"
             align="center"
+            width="100px"
         >
           <template slot-scope="scope">
             <span>{{ scope.row.pack_unit }}</span>
@@ -61,6 +62,7 @@
         <el-table-column
             label="药品价格"
             align="center"
+            width="100px"
             >
           <template slot-scope="scope">
             <span>{{ scope.row.price }}</span>
@@ -78,6 +80,7 @@
         <el-table-column
             label="剂量单位"
             align="center"
+            width="100px"
             >
           <template slot-scope="scope">
             <span>{{ scope.row.dose_unit }}</span>
