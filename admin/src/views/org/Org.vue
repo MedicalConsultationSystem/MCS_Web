@@ -162,12 +162,11 @@ export default {
     },
     onAddDoctor(){//添加信息
       this.dialog={
-        title:'编辑机构信息',
         show:true,
         option:'edit'
       }
       this.formData = {
-        orgName:""
+        org_name:""
       }
     },
     handleSizeChange(page_size){

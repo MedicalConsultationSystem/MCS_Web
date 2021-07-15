@@ -321,6 +321,27 @@ name: "Doctor",
     this.setPaginations();
   },
   methods:{
+    getMsg(){
+      this.$axios
+          .get('https://api.zghy.xyz/dept/listAll')
+          .then(res => {
+            console.log(res);
+            if(res.data.msg==="科室信息获取成功"){
+              this.$message({
+                message: '科室信息获取成功',
+                type: 'success'
+              });
+              console.log(JSON.stringify(res.data.data))
+              console.log(this.allTableData)
+              this.allTableData=res.data.data
+              console.log(this.allTableData);
+              this.setPaginations();
+            }
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+    },
     handleCurrentChange(page){
       //获取当前页
       let index = this.paginations.page_size * (page -1);

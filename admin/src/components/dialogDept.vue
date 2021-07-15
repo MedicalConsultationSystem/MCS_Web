@@ -19,7 +19,7 @@ export default {
     return{
       formLabelWidth: '120px',
       formDialog: {
-        deptName: [{ required: true, message: "科室名称不能为空", trigger: "blur" }],
+        dept_name: [{ required: true, message: "科室名称不能为空", trigger: "blur" }],
       }
     }
   },
@@ -35,7 +35,7 @@ export default {
           .then(res =>{
             console.log(res);
             this.$message({
-              message: "添加信息成功",
+              message: "添加科室信息成功",
               type: "success"
             });
           })

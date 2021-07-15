@@ -177,6 +177,7 @@ export default {
       this.formData = {
         deptName:""
       }
+
     },
     handleSizeChange(page_size){
       this.paginations.page_index = 1;
