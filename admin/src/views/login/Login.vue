@@ -1,5 +1,10 @@
 <template>
   <div id="userLayout">
+    <div class="page-login--layer page-login--layer-area">
+      <ul class="circles">
+        <li v-for="n in 10" :key="n"></li>
+      </ul>
+    </div>
     <div class="login_panel">
       <div class="login_panel_form">
         <el-form
@@ -84,4 +89,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "newLogin.scss";
+.page-login--layer {
+  @extend %full;
+  overflow: auto;
+}
+%full {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+.page-login--layer-area {
+  overflow: hidden;
+}
 </style>

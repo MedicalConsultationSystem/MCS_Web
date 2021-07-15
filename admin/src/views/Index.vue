@@ -1,17 +1,18 @@
 <template>
   <div>
     <el-container style="height: 950px">
-      <el-aside :style="{background: '#191a23'}">
-        <div class="title" :style="{background:'#191a23'}">
+      <el-aside style="background: #304156;width: 160px">
+        <div class="title" style="background: #304156;width: 160px">
 <!--          <img alt class="logoimg" :src="$GIN_VUE_ADMIN.appLogo">-->
-          <p class="tit-text" :style="{color:'#fff'}">MVC</p>
+          <p class="tit-text" :style="{color:'#fff'}">MCS</p>
         </div>
         <el-menu
             default-active="/doctor"
             class="el-menu-vertical-demo"
             @open="open"
             @close="close"
-            background-color="#545c64"
+            background-color="#304156"
+            style="background: #304156;width: 160px"
             text-color="#fff"
             active-text-color="#ffd04b">
           <el-menu-item index="/doctor" @click="goto('/doctor')">
