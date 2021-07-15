@@ -138,7 +138,7 @@
         </el-pagination>
       </div>
     </div>
-    <Dialog :dialog="dialog" :form-data="formData"></Dialog>
+    <Dialog :dialog="dialog" :form-data="formData" @update="getMsg"></Dialog>
   </div>
 </template>
 
@@ -349,8 +349,30 @@ export default {
   },
   created () {
     this.setPaginations();
+    this.getMsg();
   },
   methods:{
+    getMsg(){
+      this.$axios
+          .get('https://api.zghy.xyz/drug/listAll')
+          .then(res => {
+            console.log(res);
+            if(res.data.msg==="药物信息获取成功"){
+              this.$message({
+                message: '药物信息获取成功',
+                type: 'success'
+              });
+              console.log(JSON.stringify(res.data.data))
+              console.log(this.allTableData)
+              this.allTableData=res.data.data
+              console.log(this.allTableData);
+              this.setPaginations();
+            }
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+    },
     handleCurrentChange(page){
       //获取当前页
       let index = this.paginations.page_size * (page -1);
