@@ -81,6 +81,11 @@ export default {
                   this.$emit("update"); //传递父组件,进行视图更新
                   //情况内容
                   this.formData = "";
+                }else if(res.data.code===-1){
+                  this.$message({
+                    message: "请将信息填写完整",
+                    type: "error"
+                  });
                 }
               })
         }

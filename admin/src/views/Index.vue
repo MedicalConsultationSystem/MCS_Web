@@ -7,7 +7,6 @@
           <p class="tit-text" :style="{color:'#fff'}">MCS</p>
         </div>
         <el-menu
-            default-active="/doctor"
             class="el-menu-vertical-demo"
             @open="open"
             @close="close"
