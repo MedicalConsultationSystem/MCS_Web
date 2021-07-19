@@ -59,13 +59,18 @@ export default {
                   console.log(res);
                   if(res.data.code===0){
                     this.$message({
-                      message: "更新机构信息成功",
+                      message: "更新科室信息成功",
                       type: "success"
                     });
                     this.dialog.show = false;
                     // 更新数据
                     this.$emit("update"); //传递父组件,进行视图更新
                     //情况内容
+                  }else if(res.data.code===-1){
+                    this.$message({
+                      message: "科室名称不能为空",
+                      type: "error"
+                    });
                   }
                 })
           }
