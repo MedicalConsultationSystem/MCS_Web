@@ -153,7 +153,7 @@ export default {
     onAddDoctor(){//添加信息
       this.dialog={
         show:true,
-        option:'edit'
+        option:'add'
       }
       this.formData = {
         org_name:""
@@ -184,7 +184,8 @@ export default {
         option:'edit'
       }
       this.formData = {
-        org_name:row.org_name
+        org_name:row.org_name,
+        org_id:row.org_id
       }
     },
     handleDelete(index,row){

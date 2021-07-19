@@ -27,25 +27,34 @@ export default {
     dialogAdd(dialogData){
       this.$refs[dialogData].validate(valid =>{
         if(valid){
+          console.log(this.dialog.option)
           console.log(this.formData)
           let reqJson= JSON.stringify(this.formData)
           console.log(reqJson)
           console.log(typeof (reqJson))
-          this.$axios.post('https://api.zghy.xyz/organization/add',reqJson,{headers:{'Content-Type':'application/raw'}})
-              .then(res =>{
-                console.log(res);
-                if(res.data.code===0){
-                  this.$message({
-                    message: "添加机构信息成功",
-                    type: "success"
-                  });
-                  this.dialog.show = false;
-                  // 更新数据
-                  this.$emit("update"); //传递父组件,进行视图更新
-                  //情况内容
-                  this.formData = "";
-                }
-              })
+          if(this.dialog.option==="add"){
+            this.$axios.post('https://api.zghy.xyz/organization/add',reqJson)
+                .then(res =>{
+                  console.log(res);
+                  if(res.data.code===0){
+                    this.$message({
+                      message: "添加机构信息成功",
+                      type: "success"
+                    });
+                    this.dialog.show = false;
+                    // 更新数据
+                    this.$emit("update"); //传递父组件,进行视图更新
+                    //情况内容
+                    this.formData = "";
+                  }
+                })
+          }else{
+            this.$axios.put('https://api.zghy.xyz/dept/updateDept',reqJson)
+                .then(res=>{
+                  console.log(res);
+                })
+          }
+
         }
       })
     },

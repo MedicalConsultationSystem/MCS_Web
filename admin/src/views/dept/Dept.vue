@@ -182,7 +182,7 @@ export default {
       this.dialog={
         title:'编辑科室信息',
         show:true,
-        option:'edit'
+        option:'add'
       }
       this.formData = {
         dept_name:""
@@ -214,7 +214,8 @@ export default {
         option:'edit'
       }
       this.formData = {
-        dept_name:row.dept_name
+        dept_name:row.dept_name,
+        dept_id:row.dept_id
       }
     },
     handleDelete(index,row){
