@@ -32,7 +32,7 @@
             width="80px"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.org_id }}</span>
+            <span>{{ scope.$index+1}}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -90,6 +90,7 @@ export default {
       },
       message:"数据不存在",
       formLabelWidth: '120px',
+      index:0,
       paginations:{
         page_index:1, //当前位于哪页
         total:0, //总数

@@ -32,7 +32,7 @@
             width="80px"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.dept_id }}</span>
+            <span>{{ scope.$index+1 }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -89,6 +89,7 @@ export default {
         doctorName:'',
       },
       info:"",
+      index:0,
       dept_id:null,
       dept_name:"",
       message:"数据不存在",
