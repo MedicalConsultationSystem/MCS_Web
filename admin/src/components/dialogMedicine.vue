@@ -68,26 +68,50 @@ export default {
           console.log(reqJson[0])
           console.log(reqJson)
           console.log(typeof (reqJson))
-          this.$axios.post('https://api.zghy.xyz/drug/add',reqJson,{headers:{'Content-Type':'application/raw'}})
-              .then(res =>{
-                console.log(res);
-                if(res.data.code===0){
-                  this.$message({
-                    message: "添加药物信息成功",
-                    type: "success"
-                  });
-                  this.dialog.show = false;
-                  // 更新数据
-                  this.$emit("update"); //传递父组件,进行视图更新
-                  //情况内容
-                  this.formData = "";
-                }else if(res.data.code===-1){
-                  this.$message({
-                    message: "请将信息填写完整",
-                    type: "error"
-                  });
-                }
-              })
+          if(this.dialog.option==="add"){
+            this.$axios.post('https://api.zghy.xyz/drug/add',reqJson,{headers:{'Content-Type':'application/raw'}})
+                .then(res =>{
+                  console.log(res);
+                  if(res.data.code===0){
+                    this.$message({
+                      message: "添加药物信息成功",
+                      type: "success"
+                    });
+                    this.dialog.show = false;
+                    // 更新数据
+                    this.$emit("update"); //传递父组件,进行视图更新
+                    //情况内容
+                    this.formData = "";
+                  }else if(res.data.code===-1){
+                    this.$message({
+                      message: "请将信息填写完整",
+                      type: "error"
+                    });
+                  }
+                })
+          }else {
+            this.$axios.put('https://api.zghy.xyz/drug/updateDrug',reqJson)
+                .then(res =>{
+                  console.log(res);
+                  if(res.data.code===0){
+                    this.$message({
+                      message: "更新药物信息成功",
+                      type: "success"
+                    });
+                    this.dialog.show = false;
+                    // 更新数据
+                    this.$emit("update"); //传递父组件,进行视图更新
+                    //情况内容
+                    this.formData = "";
+                  }else if(res.data.code===-1){
+                    this.$message({
+                      message: "请将信息填写完整",
+                      type: "error"
+                    });
+                  }
+                })
+          }
+
         }
       })
     },

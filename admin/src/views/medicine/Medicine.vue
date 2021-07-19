@@ -272,7 +272,7 @@ export default {
       this.dialog={
         title:'编辑药物信息',
         show:true,
-        option:'edit'
+        option:'add'
       }
       this.formData = {
         drug_name:"",
@@ -314,6 +314,7 @@ export default {
         option:'edit'
       }
       this.formData = {
+        drug_id:row.drug_id,
         drug_name:row.drug_name,
         trade_name: row.trade_name,
         specification:row.specification,
