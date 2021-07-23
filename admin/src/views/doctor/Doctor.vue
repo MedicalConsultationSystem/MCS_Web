@@ -5,12 +5,13 @@
       <div class="search">
         <el-form-item>
           <el-input
-              v-model="name"
+              v-model="search_data.doctor_name"
               placeholder="请输入医生姓名">
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" size ="small" icon="el-icon-search">查询</el-button>
+          <el-button type="primary" size ="small" icon="el-icon-search" @click="findByName">查询</el-button>
+          <el-button type="primary" size ="small" :disabled="this.btn_disabled" @click="handleCancel">取消</el-button>
         </el-form-item>
       </div>
       <el-form-item class="btnRight">
@@ -119,6 +120,7 @@ name: "Doctor",
   data(){
   return{
     message:"数据不存在",
+    btn_disabled:true,
     search_data:{
       doctor_name:'',
     },
@@ -140,92 +142,7 @@ name: "Doctor",
       page_sizes:[10,15,20], //每页显示多少条
       layout:'total, sizes, prev, pager, next, jumper'
     },
-    allTableData: [
-      {
-        doctor_name:"1JIA1",
-        dept_name: "内科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA2",
-        dept_name: "外科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA3",
-        dept_name: "骨科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA4",
-        dept_name: "内科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA5",
-        dept_name: "外科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA6",
-        dept_name: "骨科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA7",
-        dept_name: "内科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA8",
-        dept_name: "外科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA9",
-        dept_name: "骨科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA10",
-        dept_name: "内科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA11",
-        dept_name: "外科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-      {
-        doctor_name:"1JIA12",
-        dept_name: "骨科",
-        doctor_id:"无",
-        org_name:"浙江省第一医院",
-        level_name:"医师",
-      },
-    ],
+    allTableData: [],
     dialog:{  //弹出框
       title:'',
       show:false,
@@ -257,6 +174,36 @@ name: "Doctor",
     this.getOrg();
   },
   methods:{
+
+    findByName(){
+      console.log(this.search_data)
+      if(this.search_data.doctor_name===""){
+        this.$message({
+          message: '搜索关键字不能为空',
+          type: 'warning'
+        });
+      }
+      let reqJson=JSON.stringify(this.search_data)
+      this.$axios
+      .post('https://api.zghy.xyz/doctor/findByName',reqJson)
+      .then(res=>{
+        console.log(res)
+        if(res.data.code===0){
+          this.$message({
+            message: '查询成功',
+            type: 'success'
+          });
+          this.allTableData=res.data.data
+          console.log(this.allTableData);
+          this.setPaginations();
+          this.btn_disabled=false
+        }
+      })
+    },
+    handleCancel(){
+      this.getMsg();
+      this.btn_disabled=true
+    },
     getMsg(){
       this.$axios
           .get('https://api.zghy.xyz/doctor/listAll')
