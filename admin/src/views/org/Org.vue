@@ -5,12 +5,13 @@
         <div class="search">
           <el-form-item>
             <el-input
-                v-model="searchData"
+                v-model="search_data.org_name"
                 placeholder="请输入机构名称">
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" size ="small" icon="el-icon-search">查询</el-button>
+            <el-button type="primary" size ="small" icon="el-icon-search" @click="findByName">查询</el-button>
+            <el-button type="primary" size ="small" :disabled="this.btn_disabled" @click="handleCancel">取消</el-button>
           </el-form-item>
         </div>
         <el-form-item class="btnRight">
@@ -86,10 +87,11 @@ export default {
   data() {
     return {
       search_data:{
-        doctorName:'',
+        org_name:'',
       },
       message:"数据不存在",
       formLabelWidth: '120px',
+      btn_disabled:false,
       index:0,
       paginations:{
         page_index:1, //当前位于哪页
@@ -115,6 +117,10 @@ export default {
     this.getMsg();
   },
   methods:{
+    handleCancel(){
+      this.getMsg();
+      this.btn_disabled=true
+    },
     getMsg(){
       this.$axios
           .get('https://api.zghy.xyz/organization/listAll')
@@ -231,6 +237,30 @@ export default {
         });
       });
     },
+    findByName(){
+      if(this.search_data.org_name===""){
+        this.$message({
+          message: '搜索关键字不能为空',
+          type: 'warning'
+        })
+      }
+      let reqJson=JSON.stringify(this.search_data)
+      this.$axios
+          .post('https://api.zghy.xyz/organization/findOrg',reqJson)
+          .then(res=>{
+            console.log(res)
+            if(res.data.code===0){
+              this.$message({
+                message: '查询成功',
+                type: 'success'
+              });
+              this.allTableData=res.data.data
+              console.log(this.allTableData);
+              this.setPaginations();
+              this.btn_disabled=false
+            }
+          })
+    }
   }
 }
 </script>
