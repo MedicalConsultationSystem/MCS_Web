@@ -1,31 +1,31 @@
 <template>
   <el-dialog :title="dialog.title" :visible.sync="dialog.show" >
-    <el-form :model="formData">
+    <el-form :model="formData" ref="dialogData">
       <el-form-item label="姓名" :label-width="formLabelWidth">
-        <el-input v-model="formData.doctorName" autocomplete="off"></el-input>
+        <el-input v-model="formData.doctor_name" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="职称" :label-width="formLabelWidth">
-        <el-select v-model="formData.doctorLevel" placeholder="请选择职称" style="width: 840px">
-          <el-option v-for="item in doctorLevels" :value="item.id" :key="item.id" :label="item.label"></el-option>
+        <el-select v-model="formData.level_name" placeholder="请选择职称" style="width: 840px">
+          <el-option v-for="item in level_names" :value="item.label" :key="item.label" :label="item.label"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="所属科室" :label-width="formLabelWidth">
-        <el-select v-model="formData.department" placeholder="请选择科室" clearable filterable style="width: 840px">
-          <el-option v-for="item in formData.depts" :value="item.id" :key="item.id" :label="item.label"></el-option>
+        <el-select v-model="formData.dept_name" placeholder="请选择科室" clearable filterable style="width: 840px">
+          <el-option v-for="item in formData.depts" :value="item.dept_name" :key="item.dept_name" :label="item.dept_name"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="所属机构" :label-width="formLabelWidth">
-        <el-select v-model="formData.organization" placeholder="请选择机构" clearable filterable style="width: 840px">
-          <el-option v-for="item in formData.orgs" :value="item.org_id" :key="item.org_id" :label="item.org_name"></el-option>
+        <el-select v-model="formData.org_name" placeholder="请选择机构" clearable filterable style="width: 840px">
+          <el-option v-for="item in formData.orgs" :value="item.org_name" :key="item.org_name" :label="item.org_name"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="备注" :label-width="formLabelWidth">
-        <el-input v-model="formData.remark" autocomplete="off"></el-input>
+      <el-form-item label="电话号码" :label-width="formLabelWidth">
+        <el-input v-model="formData.doctor_id" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialog.show = false">取 消</el-button>
-      <el-button type="primary" @click="dialog.show = false">确 定</el-button>
+      <el-button type="primary" @click="dialogAdd('dialogData')">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -36,7 +36,7 @@ name: "Dialog",
   data(){
   return{
     formLabelWidth: '80px',
-    doctorLevels:[
+    level_names:[
       {
         id:1,
         label:"医士"
@@ -63,6 +63,38 @@ name: "Dialog",
       },
     ],
   }
+  },
+  methods:{
+   dialogAdd(dialogData){
+     this.$refs[dialogData].validate(valid =>{
+       if (valid){
+         console.log(this.formData)
+         let reqJson=JSON.stringify(this.formData)
+         console.log(reqJson)
+         if(this.dialog.option==="add"){
+           this.$axios
+           .post('https://api.zghy.xyz/doctor/add',reqJson)
+           .then(res=>{
+             console.log(res)
+             if (res.data.code===0){
+               this.$message({
+                 message:"添加医生信息成功",
+                 type:"success"
+               });
+               this.dialog.show = false;
+               this.$emit("update"); //传递父组件,进行视图更新
+               this.formData = "";
+             }else if(res.data.code===-1){
+               this.$message({
+                 message: "所填信息不能为空",
+                 type: "error"
+               });
+             }
+           })
+         }
+       }
+     })
+   }
   },
 
   props:{

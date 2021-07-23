@@ -31,7 +31,7 @@
         align="center"
         >
       <template slot-scope="scope">
-        <span>{{ scope.row.doctorName }}</span>
+        <span>{{ scope.row.doctor_name }}</span>
       </template>
     </el-table-column>
       <el-table-column
@@ -39,7 +39,7 @@
           align="center"
       >
         <template slot-scope="scope">
-          <span>{{ scope.row.doctorLevel }}</span>
+          <span>{{ scope.row.level_name }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -47,7 +47,7 @@
           align="center"
           >
         <template slot-scope="scope">
-          <span>{{ scope.row.department }}</span>
+          <span>{{ scope.row.dept_name }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -55,15 +55,15 @@
           align="center"
       >
         <template slot-scope="scope">
-          <span>{{ scope.row.organization }}</span>
+          <span>{{ scope.row.org_name }}</span>
         </template>
       </el-table-column>
       <el-table-column
-          label="备注"
+          label="手机号码"
           align="center"
           width="200">
         <template slot-scope="scope">
-          <span>{{ scope.row.remark }}</span>
+          <span>{{ scope.row.doctor_id }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -105,7 +105,7 @@
       </el-pagination>
     </div>
   </div>
-  <Dialog :dialog="dialog" :form-data="formData"></Dialog>
+  <Dialog :dialog="dialog" :form-data="formData" @update="getMsg"></Dialog>
 </div>
 </template>
 
@@ -120,7 +120,7 @@ name: "Doctor",
   return{
     message:"数据不存在",
     search_data:{
-      doctorName:'',
+      doctor_name:'',
     },
     form: {
       name: '',
@@ -142,88 +142,88 @@ name: "Doctor",
     },
     allTableData: [
       {
-        doctorName:"1JIA1",
-        department: "内科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA1",
+        dept_name: "内科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA2",
-        department: "外科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA2",
+        dept_name: "外科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA3",
-        department: "骨科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA3",
+        dept_name: "骨科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA4",
-        department: "内科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA4",
+        dept_name: "内科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA5",
-        department: "外科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA5",
+        dept_name: "外科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA6",
-        department: "骨科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA6",
+        dept_name: "骨科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA7",
-        department: "内科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA7",
+        dept_name: "内科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA8",
-        department: "外科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA8",
+        dept_name: "外科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA9",
-        department: "骨科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA9",
+        dept_name: "骨科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA10",
-        department: "内科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA10",
+        dept_name: "内科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA11",
-        department: "外科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA11",
+        dept_name: "外科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
       {
-        doctorName:"1JIA12",
-        department: "骨科",
-        remark:"无",
-        organization:"浙江省第一医院",
-        doctorLevel:"医师",
+        doctor_name:"1JIA12",
+        dept_name: "骨科",
+        doctor_id:"无",
+        org_name:"浙江省第一医院",
+        level_name:"医师",
       },
     ],
     dialog:{  //弹出框
@@ -232,103 +232,39 @@ name: "Doctor",
       option:'edit'
     },
 
-    departments:[
-      {
-        id:1,
-        label:"内科"
-      },
-      {
-        id:2,
-        label:"外科"
-      },
-      {
-        id:3,
-        label:"骨科"
-      }],
+    dept_names:[],
 
-    organizations:[
-      {
-        org_id:1,
-        org_name:"浙江省第一医院"
-      },
-      {
-        org_id:2,
-        org_name:"浙江省第二医院"
-      },
-      {
-        org_id:3,
-        org_name:"浙江医院"
-      },
-      {
-        org_id:4,
-        org_name:"杭州市第一人民医院"
-      },
-      {
-        org_id:5,
-        org_name:"杭州市中医院"
-      },
-      {
-        org_id:6,
-        org_name:"浙江省人民医院浙江省立医院"
-      },
-      {
-        org_id:7,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:8,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:9,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:7,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:7,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:7,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:7,
-        org_name:"浙江大学医学院附属第一医院"
-      },
-      {
-        org_id:7,
-        org_name:"浙江大学医学院附属第一医院"
-      }
-    ],
+    org_names:[],
 
     tableData:[], //分页数据
     formData: {  //添加编辑删除需要传的字段
-      doctorName: "",
-      department: "",
-      remark: "",
-      organization:"",
-      doctorLevel:"",
-      depts:this.departments,
-      orgs:this.organizations
+      doctor_name: "",
+      dept_name: "",
+      doctor_id: "",
+      dept_id:"",
+      org_id:"",
+      org_name:"",
+      level_name:"",
+      depts:this.dept_names,
+      orgs:this.org_names
     },
   }
   },
   created () {
     this.setPaginations();
+    this.getMsg();
+    this.getDept();
+    this.getOrg();
   },
   methods:{
     getMsg(){
       this.$axios
-          .get('https://api.zghy.xyz/dept/listAll')
+          .get('https://api.zghy.xyz/doctor/listAll')
           .then(res => {
             console.log(res);
-            if(res.data.msg==="科室信息获取成功"){
+            if(res.data.msg==="医生信息获取成功"){
               this.$message({
-                message: '科室信息获取成功',
+                message: '医生信息获取成功',
                 type: 'success'
               });
               console.log(JSON.stringify(res.data.data))
@@ -340,6 +276,28 @@ name: "Doctor",
           })
           .catch((error)=>{
             console.log(error)
+          })
+    },
+    getOrg(){
+      this.$axios
+      .get('https://api.zghy.xyz/organization/listAll')
+      .then(res=>{
+        console.log(res)
+        if(res.data.code===0){
+          this.org_names=res.data.data
+          console.log(this.org_names)
+        }
+      })
+    },
+    getDept(){
+      this.$axios
+          .get('https://api.zghy.xyz/dept/listAll')
+          .then(res=>{
+            console.log(res)
+            if(res.data.code===0){
+              this.dept_names=res.data.data
+              console.log(this.dept_names)
+            }
           })
     },
     handleCurrentChange(page){
@@ -361,16 +319,17 @@ name: "Doctor",
       this.dialog={
         title:'编辑医生信息',
         show:true,
-        option:'edit'
+        option:'add'
       }
       this.formData = {
-        doctorName:"",
-        department:"",
-        remark:"",
-        organization:"",
-        doctorLevel: "",
-        depts:this.departments,
-        orgs:this.organizations
+        doctor_name:"",
+        dept_name:"",
+        doctor_id:"",
+        org_name:"",
+        level_name: "",
+        org_id:"",
+        depts:this.dept_names,
+        orgs:this.org_names
       }
     },
     handleSizeChange(page_size){
@@ -398,14 +357,15 @@ name: "Doctor",
         option:'edit'
       }
       this.formData = {
-        doctorName:row.doctorName,
-        department:row.department,
-        remark:row.remark,
-        doctorLevel: row.doctorLevel,
-        organization:row.organization,
+        doctor_name:row.doctor_name,
+        dept_name:row.dept_name,
+        org_id:row.org_id,
+        doctor_id:row.doctor_id,
+        level_name: row.level_name,
+        org_name:row.org_name,
         id:row.id,
-        depts:this.departments,
-        orgs:this.organizations
+        depts:this.dept_names,
+        orgs:this.org_names
       }
     },
   }

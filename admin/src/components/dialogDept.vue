@@ -32,7 +32,7 @@ export default {
           console.log(reqJson)
           console.log(typeof (reqJson))
           if(this.dialog.option==="add") {
-            this.$axios.post('https://api.zghy.xyz/dept/add',reqJson,{headers:{'Content-Type':'application/raw'}})
+            this.$axios.post('https://api.zghy.xyz/dept/add',reqJson)
                 .then(res =>{
                   console.log(res);
                   if(res.data.code===0){
