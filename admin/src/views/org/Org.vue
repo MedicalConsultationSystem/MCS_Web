@@ -91,7 +91,7 @@ export default {
       },
       message:"数据不存在",
       formLabelWidth: '120px',
-      btn_disabled:false,
+      btn_disabled:true,
       index:0,
       paginations:{
         page_index:1, //当前位于哪页

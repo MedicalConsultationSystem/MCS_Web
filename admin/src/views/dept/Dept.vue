@@ -10,7 +10,8 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" size ="small" icon="el-icon-search">查询</el-button>
+            <el-button type="primary" size ="small" icon="el-icon-search" @click="findByName">查询</el-button>
+            <el-button type="primary" size ="small" :disabled="this.btn_disabled" @click="handleCancel">取消</el-button>
           </el-form-item>
         </div>
         <el-form-item class="btnRight">
@@ -91,6 +92,7 @@ export default {
       info:"",
       index:0,
       dept_id:null,
+      btn_disabled:true,
       dept_name:"",
       message:"数据不存在",
       formLabelWidth: '120px',
@@ -117,10 +119,12 @@ export default {
     this.setPaginations();
     this.getMsg();
   },
-  mounted() {
 
-  },
   methods:{
+    handleCancel(){
+      this.getMsg();
+      this.btn_disabled=true
+    },
     open(index,row) {
       this.$confirm('此操作将永久删除该科室信息，是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -246,6 +250,30 @@ export default {
 
         }
       })
+    },
+    findByName(){
+      if(this.search_data.dept_name===""){
+        this.$message({
+          message: '搜索关键字不能为空',
+          type: 'warning'
+        })
+      }
+      let reqJson=JSON.stringify(this.search_data)
+      this.$axios
+          .post('https://api.zghy.xyz/dept/findDept',reqJson)
+          .then(res=>{
+            console.log(res)
+            if(res.data.code===0){
+              this.$message({
+                message: '查询成功',
+                type: 'success'
+              });
+              this.allTableData=res.data.data
+              console.log(this.allTableData);
+              this.setPaginations();
+              this.btn_disabled=false
+            }
+          })
     }
   }
 }
