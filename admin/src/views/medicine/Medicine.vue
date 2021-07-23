@@ -123,18 +123,8 @@
             <el-button
                 size="small"
                 type="danger"
+                @click="open(scope.$index, scope.row)"
             >删除</el-button>
-            <!-- <el-popover
-              placement="top"
-              width="160"
-              v-model="visible">
-              <p>确定要删除吗？</p>
-              <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-                <el-button type="primary" size="mini" @click="getDeleteVisible(scope.$index, scope.row)">确定</el-button>
-              </div>
-              <el-button slot="reference" @click="handleDelete(scope.row)">删除</el-button>
-            </el-popover> -->
           </template>
         </el-table-column>
       </el-table>
@@ -359,6 +349,65 @@ export default {
         pack_units:this.pack_units,
         dose_units:this.dose_units
       }
+    },
+    handleDelete(index,row){
+      let reqJson={
+        drug_name:row.drug_name,
+        drug_id: row.drug_id,
+        trade_name: row.trade_name,
+        specification:row.specification,
+        pack_unit:row.pack_unit,
+        price:row.price,
+        dose:row.dose,
+        dose_unit:row.dose_unit,
+        factory_name:row.factory_name,
+        approval_number:row.approval_number,
+        pinyin_code:row.pinyin_code,
+      }
+      console.log(reqJson);
+      reqJson.dept_id=parseInt(reqJson.drug_id);
+      reqJson.dose=parseInt(reqJson.dose);
+      reqJson.price=parseInt(reqJson.price);
+      console.log(typeof(reqJson.dept_id))
+      reqJson=JSON.stringify(reqJson)
+      this.$axios.delete('https://api.zghy.xyz/drug/deleteDrug',{data:reqJson})
+          .then(res =>{
+            console.log(res);
+            let msg="success";
+            if(res.data.code===0){
+              console.log("nb")
+              this.$message({
+                message: "删除科室信息成功",
+                type: "success"
+              });
+              this.getMsg();
+              return msg;
+
+            }
+          })
+    },
+    open(index,row) {
+      this.$confirm('此操作将永久删除该科室信息，是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let msg=this.handleDelete(index,row)
+        console.log(msg)
+        if(msg==="success"){
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          console.log("lalal")
+
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     },
   }
 }
