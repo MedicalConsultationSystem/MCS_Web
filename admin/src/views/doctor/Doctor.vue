@@ -78,18 +78,8 @@
           <el-button
               size="small"
               type="danger"
+              @click="open(scope.$index, scope.row)"
               >删除</el-button>
-          <!-- <el-popover
-            placement="top"
-            width="160"
-            v-model="visible">
-            <p>确定要删除吗？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="getDeleteVisible(scope.$index, scope.row)">确定</el-button>
-            </div>
-            <el-button slot="reference" @click="handleDelete(scope.row)">删除</el-button>
-          </el-popover> -->
         </template>
       </el-table-column>
     </el-table>
@@ -174,7 +164,48 @@ name: "Doctor",
     this.getOrg();
   },
   methods:{
-
+    delDoc(index,row){
+      let reqJson={
+        doctor_id:row.doctor_id
+      }
+      reqJson=JSON.stringify(reqJson)
+      this.$axios.delete('https://api.zghy.xyz/doctor/deleteDoctor',{data:reqJson})
+      .then(res=>{
+        console.log(res);
+        let msg
+        if(res.data.code===0){
+          msg="success"
+          this.$message({
+            message: "删除机构信息成功",
+            type: "success"
+          });
+          this.getMsg();
+        }
+        return msg;
+      })
+    },
+    open(index,row) {
+      console.log("lalal")
+      this.$confirm('此操作将永久删除该机构信息，是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let msg=this.delDoc(index,row)
+        if(msg==="success"){
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          this.getMsg()
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
     findByName(){
       console.log(this.search_data)
       if(this.search_data.doctor_name===""){
@@ -306,6 +337,8 @@ name: "Doctor",
       this.formData = {
         doctor_name:row.doctor_name,
         dept_name:row.dept_name,
+        dept_id: row.dept_id,
+        level_code:row.level_code,
         org_id:row.org_id,
         doctor_id:row.doctor_id,
         level_name: row.level_name,

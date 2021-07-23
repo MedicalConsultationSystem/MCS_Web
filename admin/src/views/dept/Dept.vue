@@ -5,7 +5,7 @@
         <div class="search">
           <el-form-item>
             <el-input
-                v-model="searchData"
+                v-model="search_data.dept_name"
                 placeholder="请输入科室名称">
             </el-input>
           </el-form-item>
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       search_data:{
-        doctorName:'',
+        dept_name:'',
       },
       info:"",
       index:0,
@@ -128,11 +128,14 @@ export default {
         type: 'warning'
       }).then(() => {
        let msg=this.handleDelete(index,row)
+        console.log(msg)
         if(msg==="success"){
           this.$message({
             type: 'success',
             message: '删除成功!'
           });
+          console.log("lalal")
+
         }
       }).catch(() => {
         this.$message({
@@ -232,12 +235,15 @@ export default {
       .then(res =>{
         console.log(res);
         let msg="success";
-        if(res.data.code===200){
+        if(res.data.code===0){
+          console.log("nb")
           this.$message({
             message: "删除科室信息成功",
             type: "success"
           });
+          this.getMsg();
           return msg;
+
         }
       })
     }

@@ -208,11 +208,12 @@ export default {
           .then(res =>{
             console.log(res);
             let msg="success";
-            if(res.data.code===200){
+            if(res.data.code===0){
               this.$message({
                 message: "删除机构信息成功",
                 type: "success"
               });
+              this.getMsg();
               return msg;
             }
           })
