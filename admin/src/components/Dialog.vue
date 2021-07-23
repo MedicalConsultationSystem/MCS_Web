@@ -6,17 +6,17 @@
       </el-form-item>
       <el-form-item label="职称" :label-width="formLabelWidth">
         <el-select v-model="formData.level_name" placeholder="请选择职称" style="width: 840px">
-          <el-option v-for="item in level_names" :value="item.label" :key="item.label" :label="item.label"></el-option>
+          <el-option v-for="(item,index1) in level_names" :value="index1" :key="index1" :label="item.label"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="所属科室" :label-width="formLabelWidth">
         <el-select v-model="formData.dept_name" placeholder="请选择科室" clearable filterable style="width: 840px">
-          <el-option v-for="item in formData.depts" :value="item.dept_name" :key="item.dept_name" :label="item.dept_name"></el-option>
+          <el-option v-for="(item,index2) in formData.depts" :value="index2" :key="index2" :label="item.dept_name"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="所属机构" :label-width="formLabelWidth">
         <el-select v-model="formData.org_name" placeholder="请选择机构" clearable filterable style="width: 840px">
-          <el-option v-for="item in formData.orgs" :value="item.org_name" :key="item.org_name" :label="item.org_name"></el-option>
+          <el-option v-for="(item,index3) in formData.orgs" :value="index3" :key="index3" :label="item.org_name"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="电话号码" :label-width="formLabelWidth">
@@ -69,6 +69,12 @@ name: "Dialog",
      this.$refs[dialogData].validate(valid =>{
        if (valid){
          console.log(this.formData)
+         this.formData.level_code=this.level_names[this.formData.level_name].id
+         this.formData.level_name=this.level_names[this.formData.level_name].label
+         this.formData.dept_id=this.formData.depts[this.formData.dept_name].dept_id
+         this.formData.dept_name=this.formData.depts[this.formData.dept_name].dept_name
+         this.formData.org_id=this.formData.orgs[this.formData.org_name].org_id
+         this.formData.org_name=this.formData.orgs[this.formData.org_name].org_name
          let reqJson=JSON.stringify(this.formData)
          console.log(reqJson)
          if(this.dialog.option==="add"){
