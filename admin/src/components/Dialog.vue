@@ -6,7 +6,7 @@
       </el-form-item>
       <el-form-item label="职称" :label-width="formLabelWidth">
         <el-select v-model="formData.level_name" placeholder="请选择职称" style="width: 840px">
-          <el-option v-for="item in level_names" :value="item.label" :key="item.label" :label="item.label"></el-option>
+          <el-option v-for="item in level_names" :value="item.level_name" :key="item.level_name" :label="item.level_name"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="所属科室" :label-width="formLabelWidth">
@@ -36,36 +36,40 @@ name: "Dialog",
   data(){
   return{
     formLabelWidth: '80px',
-    a:{
-      "yishi":1,
-      "yishi222":2
-    },
     level_names:[
       {
-        id:1,
-        label:"医士"
+        level_code: 1,
+        level_name:"医士"
       },
       {
-        id:2,
-        label:"医师"
+        level_code: 2,
+        level_name: "医师"
       },
       {
-        id:3,
-        label:"住院医师"
+        level_code: 3,
+        level_name: "住院医师"
       },
       {
-        id:4,
-        label:"主治医师"
+        level_code: 4,
+        level_name: "主治医师"
       },
       {
-        id:5,
-        label:"副主任医师"
+        level_code: 5,
+        level_name: "副主任医师"
       },
       {
-        id:6,
-        label:"主任医师"
+        level_code: 6,
+        level_name: "主任医师"
       },
     ],
+    levels:{
+      "医士":1,
+      "医师":2,
+      "住院医师":3,
+      "主治医师":4,
+      "副主任医师":5,
+      "主任医师":6
+    },
   }
   },
   methods:{
@@ -74,13 +78,45 @@ name: "Dialog",
        if (valid){
          console.log(this.formData)
          console.log(this.formData.level_name)
-         console.log(this.a[this.formData.level_name])
-         // this.formData.level_code=this.level_names[this.formData.level_name].id
-         this.formData.level_name=this.level_names[this.formData.level_name].label
-         this.formData.dept_id=this.formData.depts[this.formData.dept_name].dept_id
-         this.formData.dept_name=this.formData.depts[this.formData.dept_name].dept_name
-         this.formData.org_id=this.formData.orgs[this.formData.org_name].org_id
-         this.formData.org_name=this.formData.orgs[this.formData.org_name].org_name
+         console.log(this.formData.depts)
+         console.log(this.levels["医士"])
+         let depts_map=this.formData.depts.map(function(obj){
+           let rObj={};
+           rObj[obj.dept_name]=obj.dept_id
+           return rObj
+         })
+         let orgs_map=this.formData.orgs.map(obj=>{
+           let rObj={};
+           rObj[obj.org_name]=obj.org_id
+           return rObj
+         })
+         console.log(orgs_map)
+         let levels_map=this.level_names.map(obj=>{
+           let rObj={};
+           rObj[obj.level_name]=obj.level_code
+           return rObj
+         })
+         for(let item in depts_map){
+           console.log(depts_map[item][this.formData.dept_name])
+           if(depts_map[item][this.formData.dept_name]){
+             this.formData.dept_id=depts_map[item][this.formData.dept_name]
+             console.log(this.formData.dept_id)
+           }
+         }
+         for(let item in orgs_map){
+           console.log(orgs_map[item][this.formData.org_name])
+           if(orgs_map[item][this.formData.org_name]){
+             this.formData.org_id=orgs_map[item][this.formData.org_name]
+             console.log(this.formData.org_id)
+           }
+         }
+         for(let item in levels_map){
+           console.log(levels_map[item][this.formData.level_name])
+           if(levels_map[item][this.formData.level_name]){
+             this.formData.level_code=levels_map[item][this.formData.level_name]
+             console.log(this.formData.level_code)
+           }
+         }
          let reqJson=JSON.stringify(this.formData)
          console.log(reqJson)
          if(this.dialog.option==="add"){
@@ -104,7 +140,6 @@ name: "Dialog",
              }
            })
          }else{
-           let reqJson
            this.$axios.put('https://api.zghy.xyz/doctor/updateDoctor',reqJson)
                .then(res=>{
                  console.log(res);
@@ -128,6 +163,7 @@ name: "Dialog",
        }
      })
    }
+
   },
 
   props:{
