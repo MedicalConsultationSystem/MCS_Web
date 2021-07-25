@@ -20,7 +20,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="电话号码" :label-width="formLabelWidth">
-        <el-input v-model="formData.doctor_id" autocomplete="off"></el-input>
+        <el-input v-model="formData.doctor_id" autocomplete="off" :disabled="dialog.input_disabled"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -36,6 +36,10 @@ name: "Dialog",
   data(){
   return{
     formLabelWidth: '80px',
+    headers:{
+      "x-token":sessionStorage.getItem('token'),
+    },
+    input_disabled:false,
     level_names:[
       {
         level_code: 1,
@@ -121,7 +125,7 @@ name: "Dialog",
          console.log(reqJson)
          if(this.dialog.option==="add"){
            this.$axios
-           .post('https://api.zghy.xyz/doctor/add',reqJson)
+           .post('https://api.zghy.xyz/doctor/add',reqJson,{headers:this.headers})
            .then(res=>{
              console.log(res)
              if (res.data.code===0){
@@ -140,7 +144,7 @@ name: "Dialog",
              }
            })
          }else{
-           this.$axios.put('https://api.zghy.xyz/doctor/updateDoctor',reqJson)
+           this.$axios.put('https://api.zghy.xyz/doctor/updateDoctor',reqJson,{headers:this.headers})
                .then(res=>{
                  console.log(res);
                  if(res.data.code===0){
@@ -163,9 +167,7 @@ name: "Dialog",
        }
      })
    }
-
   },
-
   props:{
   dialog:Object,
     formData:Object

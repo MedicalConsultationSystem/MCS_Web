@@ -12,13 +12,13 @@
               @keyup.enter.native="submitForm"
           >
             <el-form-item prop="username">
-              <el-input v-model="loginForm.username" placeholder="请输入用户名">
+              <el-input v-model="loginForm.open_id" placeholder="请输入用户名">
                 <i slot="suffix" class="el-input__icon el-icon-user" />
               </el-input>
             </el-form-item>
             <el-form-item prop="password">
               <el-input
-                  v-model="loginForm.password"
+                  v-model="loginForm.phone"
                   placeholder="请输入密码"
               >
               </el-input>
@@ -27,7 +27,7 @@
               <el-button
                   type="primary"
                   style="width: 46%;margin-left:8%"
-                  @click="submitForm"
+                  @click="login()"
               >登 录</el-button>
             </el-form-item>
           </el-form>
@@ -41,28 +41,10 @@
 export default {
   name: 'Login',
   data(){
-    const checkUsername = (rule, value, callback) => {
-      if (value.length < 5) {
-        return callback(new Error('请输入正确的用户名'))
-      } else {
-        callback()
-      }
-    }
-    const checkPassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        return callback(new Error('请输入正确的密码'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
-        username: 'admin',
-        password: '123456',
-      },
-      rules: {
-        username: [{ validator: checkUsername, trigger: 'blur' }],
-        password: [{ validator: checkPassword, trigger: 'blur' }]
+        open_id: 'admin',
+        phone: 'admin',
       },
     }
 
@@ -80,8 +62,26 @@ export default {
           })
         }
       })
+    },
+    login(){
+      let reqJson=JSON.stringify(this.loginForm)
+      console.log(reqJson)
+      this.$axios
+          .post('https://api.zghy.xyz/account/admin',reqJson)
+          .then(res=>{
+            console.log(res)
+            if(res.data.code===0){
+              console.log(res.data.data)
+              sessionStorage.setItem('token',res.data.data)
+              this.submitForm()
+            }
+          })
+      .catch(errors=>{
+        console.log(errors)
+      })
     }
-  }
+
+  },
 }
 </script>
 

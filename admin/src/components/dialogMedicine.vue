@@ -51,6 +51,9 @@ export default {
   data(){
     return{
       formLabelWidth: '100px',
+      headers:{
+        "x-token":sessionStorage.getItem('token'),
+      },
       formDialog: {
         drug_name: [{ required: true, message: "药品通用名称", trigger: "blur" }],
         trade_name: [{ required: true, message: "商品名", trigger: "blur" }],
@@ -69,7 +72,7 @@ export default {
           console.log(reqJson)
           console.log(typeof (reqJson))
           if(this.dialog.option==="add"){
-            this.$axios.post('https://api.zghy.xyz/drug/add',reqJson,{headers:{'Content-Type':'application/raw'}})
+            this.$axios.post('https://api.zghy.xyz/drug/add',reqJson,{headers:this.headers})
                 .then(res =>{
                   console.log(res);
                   if(res.data.code===0){
@@ -90,7 +93,7 @@ export default {
                   }
                 })
           }else {
-            this.$axios.put('https://api.zghy.xyz/drug/updateDrug',reqJson)
+            this.$axios.put('https://api.zghy.xyz/drug/updateDrug',reqJson,{headers:this.headers})
                 .then(res =>{
                   console.log(res);
                   if(res.data.code===0){

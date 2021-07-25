@@ -91,6 +91,9 @@ export default {
       },
       info:"",
       index:0,
+      headers:{
+        "x-token":sessionStorage.getItem('token'),
+      },
       dept_id:null,
       btn_disabled:true,
       dept_name:"",
@@ -150,7 +153,7 @@ export default {
     },
     getMsg(){
       this.$axios
-          .get('https://api.zghy.xyz/dept/listAll')
+          .get('https://api.zghy.xyz/dept/listAll',{headers:this.headers})
           .then(res => {
             console.log(res);
             if(res.data.msg==="科室信息获取成功"){
@@ -188,7 +191,7 @@ export default {
     },
     onAddDoctor(){//添加信息
       this.dialog={
-        title:'编辑科室信息',
+        title:'添加科室信息',
         show:true,
         option:'add'
       }
@@ -235,7 +238,7 @@ export default {
       reqJson.dept_id=parseInt(reqJson.dept_id);
       console.log(typeof(reqJson.dept_id))
       reqJson=JSON.stringify(reqJson)
-      this.$axios.delete('https://api.zghy.xyz/dept/deleteDept',{data:reqJson})
+      this.$axios.delete('https://api.zghy.xyz/dept/deleteDept',{data:reqJson,headers:this.headers})
       .then(res =>{
         console.log(res);
         let msg="success";
@@ -260,7 +263,7 @@ export default {
       }
       let reqJson=JSON.stringify(this.search_data)
       this.$axios
-          .post('https://api.zghy.xyz/dept/findDept',reqJson)
+          .post('https://api.zghy.xyz/dept/findDept',reqJson,{headers:this.headers})
           .then(res=>{
             console.log(res)
             if(res.data.code===0){

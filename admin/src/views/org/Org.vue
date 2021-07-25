@@ -92,6 +92,9 @@ export default {
       message:"数据不存在",
       formLabelWidth: '120px',
       btn_disabled:true,
+      headers:{
+        "x-token":sessionStorage.getItem('token'),
+      },
       index:0,
       paginations:{
         page_index:1, //当前位于哪页
@@ -123,7 +126,7 @@ export default {
     },
     getMsg(){
       this.$axios
-          .get('https://api.zghy.xyz/organization/listAll')
+          .get('https://api.zghy.xyz/organization/listAll',{headers:this.headers})
           .then(res => {
             console.log(res);
             if(res.data.msg==="机构信息获取成功"){
@@ -159,6 +162,7 @@ export default {
     },
     onAddDoctor(){//添加信息
       this.dialog={
+        title: "添加机构信息",
         show:true,
         option:'add'
       }
@@ -204,7 +208,7 @@ export default {
       reqJson.org_id=parseInt(reqJson.org_id);
       console.log(typeof(reqJson.org_id))
       reqJson=JSON.stringify(reqJson)
-      this.$axios.delete('https://api.zghy.xyz/organization/deleteOrg',{data:reqJson})
+      this.$axios.delete('https://api.zghy.xyz/organization/deleteOrg',{data:reqJson,headers:this.headers})
           .then(res =>{
             console.log(res);
             let msg="success";
@@ -247,7 +251,7 @@ export default {
       }
       let reqJson=JSON.stringify(this.search_data)
       this.$axios
-          .post('https://api.zghy.xyz/organization/findOrg',reqJson)
+          .post('https://api.zghy.xyz/organization/findOrg',reqJson,{headers:this.headers})
           .then(res=>{
             console.log(res)
             if(res.data.code===0){

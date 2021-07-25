@@ -18,6 +18,9 @@ export default {
   data(){
     return{
       formLabelWidth: '120px',
+      headers:{
+        "x-token":sessionStorage.getItem('token'),
+      },
       formDialog: {
         org_name: [{ required: true, message: "科室名称不能为空", trigger: "blur" }],
       }
@@ -33,7 +36,7 @@ export default {
           console.log(reqJson)
           console.log(typeof (reqJson))
           if(this.dialog.option==="add"){
-            this.$axios.post('https://api.zghy.xyz/organization/add',reqJson)
+            this.$axios.post('https://api.zghy.xyz/organization/add',reqJson,{headers:this.headers})
                 .then(res =>{
                   console.log(res);
                   if(res.data.code===0){
@@ -54,7 +57,7 @@ export default {
                   }
                 })
           }else{
-            this.$axios.put('https://api.zghy.xyz/organization/updateOrg',reqJson)
+            this.$axios.put('https://api.zghy.xyz/organization/updateOrg',reqJson,{headers:this.headers})
                 .then(res=>{
                   console.log(res);
                   if(res.data.code===0){

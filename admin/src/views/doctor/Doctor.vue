@@ -111,6 +111,9 @@ name: "Doctor",
   return{
     message:"数据不存在",
     btn_disabled:true,
+    headers:{
+      "x-token":sessionStorage.getItem('token'),
+    },
     search_data:{
       doctor_name:'',
     },
@@ -169,7 +172,7 @@ name: "Doctor",
         doctor_id:row.doctor_id
       }
       reqJson=JSON.stringify(reqJson)
-      this.$axios.delete('https://api.zghy.xyz/doctor/deleteDoctor',{data:reqJson})
+      this.$axios.delete('https://api.zghy.xyz/doctor/deleteDoctor',{data:reqJson,headers:this.headers})
       .then(res=>{
         console.log(res);
         let msg
@@ -216,7 +219,7 @@ name: "Doctor",
       }
       let reqJson=JSON.stringify(this.search_data)
       this.$axios
-      .post('https://api.zghy.xyz/doctor/findByName',reqJson)
+      .post('https://api.zghy.xyz/doctor/findByName',reqJson,{headers:this.headers})
       .then(res=>{
         console.log(res)
         if(res.data.code===0){
@@ -237,7 +240,7 @@ name: "Doctor",
     },
     getMsg(){
       this.$axios
-          .get('https://api.zghy.xyz/doctor/listAll')
+          .get('https://api.zghy.xyz/doctor/listAll',{headers:this.headers})
           .then(res => {
             console.log(res);
             if(res.data.msg==="医生信息获取成功"){
@@ -258,7 +261,7 @@ name: "Doctor",
     },
     getOrg(){
       this.$axios
-      .get('https://api.zghy.xyz/organization/listAll')
+      .get('https://api.zghy.xyz/organization/listAll',{headers:this.headers})
       .then(res=>{
         console.log(res)
         if(res.data.code===0){
@@ -269,7 +272,7 @@ name: "Doctor",
     },
     getDept(){
       this.$axios
-          .get('https://api.zghy.xyz/dept/listAll')
+          .get('https://api.zghy.xyz/dept/listAll',{headers:this.headers})
           .then(res=>{
             console.log(res)
             if(res.data.code===0){
@@ -295,9 +298,10 @@ name: "Doctor",
     },
     onAddDoctor(){//添加信息
       this.dialog={
-        title:'编辑医生信息',
+        title:'添加医生信息',
         show:true,
-        option:'add'
+        option:'add',
+        input_disabled:false
       }
       this.formData = {
         doctor_name:"",
@@ -332,7 +336,8 @@ name: "Doctor",
       this.dialog={
         title:'编辑医生信息',
         show:true,
-        option:'edit'
+        option:'edit',
+        input_disabled:true
       }
       this.formData = {
         doctor_name:row.doctor_name,

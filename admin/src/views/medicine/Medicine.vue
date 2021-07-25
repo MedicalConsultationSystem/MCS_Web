@@ -156,6 +156,9 @@ export default {
     return{
       dialogFormVisible: false,
       message:"数据不存在",
+      headers:{
+        "x-token":sessionStorage.getItem('token'),
+      },
       btn_disabled:true,
       search_data:{
         drug_name:'',
@@ -234,7 +237,7 @@ export default {
       }
       let reqJson=JSON.stringify(this.search_data)
       this.$axios
-          .post('https://api.zghy.xyz/drug/findByName',reqJson)
+          .post('https://api.zghy.xyz/drug/findByName',reqJson,{headers:this.headers})
           .then(res=>{
             console.log(res)
             if(res.data.code===0){
@@ -255,7 +258,7 @@ export default {
     },
     getMsg(){
       this.$axios
-          .get('https://api.zghy.xyz/drug/listAll')
+          .get('https://api.zghy.xyz/drug/listAll',{headers:this.headers})
           .then(res => {
             console.log(res);
             if(res.data.msg==="药物信息获取成功"){
@@ -291,7 +294,7 @@ export default {
     },
     onAddDoctor(){//添加信息
       this.dialog={
-        title:'编辑药物信息',
+        title:'添加药物信息',
         show:true,
         option:'add'
       }
@@ -370,7 +373,7 @@ export default {
       reqJson.price=parseInt(reqJson.price);
       console.log(typeof(reqJson.dept_id))
       reqJson=JSON.stringify(reqJson)
-      this.$axios.delete('https://api.zghy.xyz/drug/deleteDrug',{data:reqJson})
+      this.$axios.delete('https://api.zghy.xyz/drug/deleteDrug',{data:reqJson,headers:this.headers})
           .then(res =>{
             console.log(res);
             let msg="success";
